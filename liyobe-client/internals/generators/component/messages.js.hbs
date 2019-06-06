@@ -6,11 +6,9 @@
 
 import { defineMessages } from 'react-intl';
 
-export const scope = 'app.components.{{ properCase name }}';
-
 export default defineMessages({
   header: {
-    id: `${scope}.header`,
-    defaultMessage: 'This is the {{ properCase name }} component!',
+    id: 'app.components.{{ properCase name }}.header',
+    defaultMessage: 'This is the {{ properCase name}} component !',
   },
 });

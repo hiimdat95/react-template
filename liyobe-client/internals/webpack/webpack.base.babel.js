@@ -34,12 +34,12 @@ module.exports = options => ({
         },
       },
       {
-        // Preprocess our own .css files
+        // Preprocess our own .scss files
         // This is the place to add your own loaders (e.g. sass/less etc.)
         // for a list of loaders, see https://webpack.js.org/loaders/#styling
         test: /\.scss$/,
         exclude: /node_modules/,
-        use: ['style-loader', 'css-loader', 'sass-loader'],
+        use: ['style-loader', 'css-loader','sass-loader'],
       },
       {
         // Preprocess our own .css files
@@ -73,7 +73,7 @@ module.exports = options => ({
         ],
       },
       {
-        test: /\.(jpg|png|gif|ico)$/,
+        test: /\.(jpg|png|gif)$/,
         use: [
           {
             loader: 'url-loader',
@@ -122,8 +122,13 @@ module.exports = options => ({
     ],
   },
   plugins: options.plugins.concat([
+    new webpack.ProvidePlugin({
+      // make fetch available
+      fetch: 'exports-loader?self.fetch!whatwg-fetch',
+    }),
+
     // Always expose NODE_ENV to webpack, in order to use `process.env.NODE_ENV`
-    // inside your code for any environment checks; Terser will automatically
+    // inside your code for any environment checks; UglifyJS will automatically
     // drop any unreachable code.
     new webpack.DefinePlugin({
       'process.env': {
@@ -135,9 +140,6 @@ module.exports = options => ({
     modules: ['node_modules', 'app'],
     extensions: ['.js', '.jsx', '.react.js'],
     mainFields: ['browser', 'jsnext:main', 'main'],
-    alias: {
-      moment: 'moment/moment.js',
-    },
   },
   devtool: options.devtool,
   target: 'web', // Make web variables accessible to webpack, e.g. window
