@@ -9,20 +9,29 @@
  */
 const addLocaleData = require('react-intl').addLocaleData; //eslint-disable-line
 const enLocaleData = require('react-intl/locale-data/en');
-const deLocaleData = require('react-intl/locale-data/de');
+const viLocaleData = require('react-intl/locale-data/vi');
+const koLocaleData = require('react-intl/locale-data/ko');
+const jaLocaleData = require('react-intl/locale-data/ja');
+const zhLocaleData = require('react-intl/locale-data/zh');
 
 const enTranslationMessages = require('./translations/en.json');
-const deTranslationMessages = require('./translations/de.json');
+const viTranslationMessages = require('./translations/vi.json');
+const koTranslationMessages = require('./translations/ko.json');
+const jaTranslationMessages = require('./translations/ja.json');
+const zhTranslationMessages = require('./translations/zh.json');
 
 addLocaleData(enLocaleData);
-addLocaleData(deLocaleData);
+addLocaleData(viLocaleData);
+addLocaleData(koLocaleData);
+addLocaleData(jaLocaleData);
+addLocaleData(zhLocaleData);
 
 const DEFAULT_LOCALE = 'en';
 
 // prettier-ignore
 const appLocales = [
   'en',
-  'de',
+  'vi',
 ];
 
 const formatTranslationMessages = (locale, messages) => {
@@ -42,7 +51,10 @@ const formatTranslationMessages = (locale, messages) => {
 
 const translationMessages = {
   en: formatTranslationMessages('en', enTranslationMessages),
-  de: formatTranslationMessages('de', deTranslationMessages),
+  vi: formatTranslationMessages('vi', viTranslationMessages),
+  ko: formatTranslationMessages('ko', koTranslationMessages),
+  ja: formatTranslationMessages('ja', jaTranslationMessages),
+  zh: formatTranslationMessages('zh', zhTranslationMessages),
 };
 
 exports.appLocales = appLocales;

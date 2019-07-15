@@ -28,11 +28,11 @@ export default function App() {
       <NotificationContainer />
       <Switch>
         {/* <PrivateRoute path="/dashboard" component={DashBoard} /> */}
-        <Route path="/dashboard" component={DashBoard} />
+        <Route exact path="/dashboard" component={DashBoard} />
         {/* <Route exact path="/login" component={LoginPage} /> */}
         <Route exact path="/error" component={ErrorPage} />
         {/* <Route exact path="/" component={LandingPage} /> */}
-        <Route component={NotFoundPage} />
+        {/* <Route component={NotFoundPage} /> */}
       </Switch>
       <GlobalStyle />
     </Fragment>

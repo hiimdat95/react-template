@@ -6,50 +6,53 @@
  */
 
 // Needed for redux-saga es6 generator support
-import 'babel-polyfill';
+import '@babel/polyfill';
 
 // Import all the third party stuff
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { ConnectedRouter } from 'react-router-redux';
-import createHistory from 'history/createBrowserHistory';
+import { ConnectedRouter } from 'connected-react-router/immutable';
+import history from 'utils/history';
 
+import 'assets/css/vendor/bootstrap.min.css';
+import 'assets/css/sass/themes/gogo.light.blue.scss';
+import 'assets/fonts/simple-line-icons/css/simple-line-icons.css';
+import 'assets/fonts/iconsmind/style.css';
 
 // Import root app
 import App from 'containers/App';
-
+import { CookiesProvider } from 'react-cookie';
 // Import Language Provider
 import LanguageProvider from 'containers/LanguageProvider';
 
 // Load the favicon and the .htaccess file
+/* eslint-disable import/no-unresolved, import/extensions */
 import '!file-loader?name=[name].[ext]!./images/favicon.ico';
-import 'file-loader?name=[name].[ext]!./.htaccess'; // eslint-disable-line import/extensions
+import 'file-loader?name=.htaccess!./.htaccess';
+/* eslint-enable import/no-unresolved, import/extensions */
 
 import configureStore from './configureStore';
 
 // Import i18n messages
 import { translationMessages } from './i18n';
 
-// Import CSS reset and Global Styles
-// import './global-styles';
-
-
 // Create redux store with history
 const initialState = {};
-const history = createHistory();
 const store = configureStore(initialState, history);
-const MOUNT_NODE = document.getElementById('app');
+const MOUNT_NODE = document.getElementById('root');
 
 const render = messages => {
   ReactDOM.render(
-    <Provider store={store}>
-      <LanguageProvider messages={messages}>
-        <ConnectedRouter history={history}>
-          <App />
-        </ConnectedRouter>
-      </LanguageProvider>
-    </Provider>,
+    <CookiesProvider>
+      <Provider store={store}>
+        <LanguageProvider messages={messages}>
+          <ConnectedRouter history={history}>
+            <App />
+          </ConnectedRouter>
+        </LanguageProvider>
+      </Provider>
+    </CookiesProvider>,
     MOUNT_NODE,
   );
 };
@@ -69,12 +72,7 @@ if (!window.Intl) {
   new Promise(resolve => {
     resolve(import('intl'));
   })
-    .then(() =>
-      Promise.all([
-        import('intl/locale-data/jsonp/en.js'),
-        import('intl/locale-data/jsonp/de.js'),
-      ]),
-    )
+    .then(() => Promise.all([import('intl/locale-data/jsonp/en.js')]))
     .then(() => render(translationMessages))
     .catch(err => {
       throw err;
