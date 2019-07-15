@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
-import AccountPage from 'containers/AccountPage';
+// import AccountPage from 'containers/AccountPage';
 
 import HomeDashBoard from './home';
 import TopNav from './TopNav';
@@ -38,7 +38,7 @@ export class DashBoard extends React.Component {
           <div className="container-fluid">
             <Switch>
               <Route exact path={`${match.url}/`} component={HomeDashBoard} />
-              <Route path={`${match.url}/account`} component={AccountPage} />
+              {/* <Route path={`${match.url}/account`} component={AccountPage} /> */}
               <Redirect to="/error" />
             </Switch>
           </div>

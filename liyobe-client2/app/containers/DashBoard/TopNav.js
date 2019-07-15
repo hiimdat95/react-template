@@ -10,12 +10,12 @@ import {
   DropdownMenu,
 } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
-import { logout } from 'containers/LoginPage/actions';
+// import { logout } from 'containers/LoginPage/actions';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import styled from 'styled-components';
 import Logo from 'assets/img/logo2.png';
 import LogoMobile from 'assets/img/logo.png';
-import { makeSelectUser } from 'containers/LoginPage/selectors';
+// import { makeSelectUser } from 'containers/LoginPage/selectors';
 import { FormattedMessage } from 'react-intl';
 import ChangeLanguage from './ChangeLang';
 import {
