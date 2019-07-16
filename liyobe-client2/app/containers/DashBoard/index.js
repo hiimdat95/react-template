@@ -22,7 +22,7 @@ export class DashBoard extends React.Component {
     return (
       <div id="app-container" className={containerClassnames}>
         <TopNav history={this.props.history} />
-        <Sidebar />
+        {/* <Sidebar /> */}
         <main>
           <div className="container-fluid">
             <Switch>

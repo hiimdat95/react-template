@@ -13,8 +13,8 @@ import { NavLink } from 'react-router-dom';
 // import { logout } from 'containers/LoginPage/actions';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import styled from 'styled-components';
-import Logo from 'assets/img/logo2.png';
-import LogoMobile from 'assets/img/logo.png';
+import LogoBlack from 'assets/img/logo-black.svg';
+import MobileLogo from 'assets/img/logo-mobile.svg';
 // import { makeSelectUser } from 'containers/LoginPage/selectors';
 import { FormattedMessage } from 'react-intl';
 import ChangeLanguage from './ChangeLang';
@@ -26,12 +26,12 @@ import * as actions from './actions';
 import messages from './messages';
 
 const LogoWrap = styled.span`
-  background: url(${Logo}) no-repeat;
+  background: url(${LogoBlack}) no-repeat;
   background-size: contain;
 `;
 
 const LogoMobileWrap = styled.span`
-  background: url(${LogoMobile}) no-repeat;
+  background: url(${MobileLogo}) no-repeat;
   background-size: contain;
 `;
 
@@ -150,8 +150,8 @@ class TopNav extends Component {
         </div>
 
         <a className="navbar-logo" href="/">
-          <LogoWrap className="logo d-none d-xs-block" />
-          <LogoMobileWrap className="logo-mobile d-block d-xs-none" />
+          <LogoWrap/>
+          <LogoMobileWrap  />
         </a>
         <div className="ml-auto">
           <div className="header-icons d-inline-block align-middle">
@@ -203,7 +203,7 @@ class TopNav extends Component {
               )}
             </button>
           </div>
-          <div className="user d-inline-block">
+          {/* <div className="user d-inline-block">
             <UncontrolledDropdown className="dropdown-menu-right">
               <DropdownToggle className="p-0" color="empty">
                 <span className="name mr-1">{user.get('fullname')}</span>
@@ -221,7 +221,7 @@ class TopNav extends Component {
                 </DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>
-          </div>
+          </div> */}
         </div>
       </nav>
     );
@@ -231,7 +231,7 @@ class TopNav extends Component {
 const mapStateToProps = createStructuredSelector({
   containerClassnames: makeSelectContainerClassName(),
   menuClickCount: makeSelectMenuClickCount(),
-  user: makeSelectUser(),
+  // user: makeSelectUser(),
   // locale: [],
 });
 
