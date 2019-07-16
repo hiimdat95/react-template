@@ -5,7 +5,7 @@ import injectReducer from 'utils/injectReducer';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import injectSaga from 'utils/injectSaga';
-// import AccountPage from 'containers/AccountPage';
+import AccountPage from 'containers/AccountPage';
 import saga from './saga';
 import { makeSelectContainerClassName } from './selectors';
 import HomeDashBoard from './home';
@@ -19,21 +19,20 @@ import 'react-datepicker/dist/react-datepicker.css';
 export class DashBoard extends React.Component {
   render() {
     const { containerClassnames, match } = this.props;
-    console.log(this.props)
     return (
-        <div id="app-container" className={containerClassnames}>
-          <TopNav history={this.props.history} />
-          <Sidebar />
-          <main>
-            <div className="container-fluid">
-              <Switch>
-                <Route exact path={`${match.url}/`} component={HomeDashBoard} />
-                {/* <Route path={`${match.url}/account`} component={AccountPage} /> */}
-                <Redirect to="/error" />
-              </Switch>
-            </div>
-          </main>
-        </div>
+      <div id="app-container" className={containerClassnames}>
+        <TopNav history={this.props.history} />
+        <Sidebar />
+        <main>
+          <div className="container-fluid">
+            <Switch>
+              <Route exact path={`${match.url}/`} component={HomeDashBoard} />
+              <Route path={`${match.url}/account`} component={AccountPage} />
+              <Redirect to="/error" />
+            </Switch>
+          </div>
+        </main>
+      </div>
     );
   }
 }

@@ -34,11 +34,11 @@ export default defineMessages({
     defaultMessage: '',
   },
   InvalidLogin: {
-    id: 'Error.InValidate.Login',
+    id: 'Notification.Error.InValidate.Login',
     defaultMessage: '',
   },
   IsLocked: {
-    id: 'Error.IsLocked.Login',
+    id: 'Notification.Error.IsLocked.Login',
     defaultMessage: '',
   },
 });

@@ -28,7 +28,7 @@ export default function App() {
       <NotificationContainer />
       <Switch>
         {/* <PrivateRoute path="/dashboard" component={DashBoard} /> */}
-        <Route exact path="/dashboard" component={DashBoard} />
+        <Route exact path="/" component={DashBoard} />
         {/* <Route exact path="/login" component={LoginPage} /> */}
         <Route exact path="/error" component={ErrorPage} />
         {/* <Route exact path="/" component={LandingPage} /> */}
