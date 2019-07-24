@@ -12,10 +12,12 @@ import {
 import { NavLink } from 'react-router-dom';
 // import { logout } from 'containers/LoginPage/actions';
 import PerfectScrollbar from 'react-perfect-scrollbar';
-import styled from 'styled-components';
-import LogoBlack from 'assets/img/logo-black.svg';
-import MobileLogo from 'assets/img/logo-mobile.svg';
+import styled, { keyframes } from "styled-components";
+// import LogoBlack from 'assets/img/logo-black.svg';
+// import MobileLogo from 'assets/img/logo-mobile.svg';
+// import { ReactComponent as Logo } from 'assets/img/logo-black.svg';
 // import { makeSelectUser } from 'containers/LoginPage/selectors';
+import Logo from 'assets/img/logo.svg';
 import { FormattedMessage } from 'react-intl';
 import ChangeLanguage from './ChangeLang';
 import {
@@ -25,16 +27,67 @@ import {
 import * as actions from './actions';
 import messages from './messages';
 
-const LogoWrap = styled.span`
-  background: url(${LogoBlack}) no-repeat;
-  background-size: contain;
+// const LogoWrap = styled.span`
+//   // background: url(${LogoBlack}) no-repeat;
+//   background-size: contain;
+// `;
+
+// const LogoMobileWrap = styled.span`
+//   background: url(${MobileLogo}) no-repeat;
+//   background-size: contain;
+// `;
+const rotate = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 `;
 
-const LogoMobileWrap = styled.span`
-  background: url(${MobileLogo}) no-repeat;
-  background-size: contain;
+const fade = keyframes`
+0% {
+fill:#61DAFB;
+}
+50% {
+ fill:black;
+}
+100%{
+  fill:#61DAFB;
+}
 `;
 
+const pulse = keyframes`
+0% {
+  transform: scale(0);
+  opacity: 1;
+  transform-origin: center;
+}
+100% {
+  transform: scale(4.5);
+  opacity: 0;
+  transform-origin: center;
+}
+`;
+
+const StyledLogo = styled(Logo)`
+  animation: ${rotate} infinite 20s linear;
+  height: 25rem;
+  width: 25rem;
+  display: block;
+  margin: auto;
+  .lines {
+    animation: ${fade} infinite 8s linear;
+  }
+  .circle {
+    animation: ${pulse} infinite 4s linear;
+    &:hover {
+      animation-play-state: paused;
+      cursor: pointer;
+    }
+  }
+`;
 class TopNav extends Component {
   constructor(props) {
     super(props);
@@ -104,6 +157,7 @@ class TopNav extends Component {
   };
 
   render() {
+    console.log(Logo);
     const { containerClassnames, menuClickCount, user } = this.props;
     return (
       <nav className="navbar fixed-top">
@@ -150,8 +204,9 @@ class TopNav extends Component {
         </div>
 
         <a className="navbar-logo" href="/">
-          <LogoWrap/>
-          <LogoMobileWrap  />
+          {/* <LogoWrap/>
+          <LogoMobileWrap  /> */}
+          <StyledLogo className="logo d-none d-xs-block"/>
         </a>
         <div className="ml-auto">
           <div className="header-icons d-inline-block align-middle">
