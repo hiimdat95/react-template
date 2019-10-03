@@ -12,6 +12,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\liyobe.Data\liyobe.Data.csproj" />
     <ProjectReference Include="..\liyobe.Infrastructure\liyobe.Infrastructure.csproj" />
     <ProjectReference Include="..\liyobe.Models\liyobe.Models.csproj" />
