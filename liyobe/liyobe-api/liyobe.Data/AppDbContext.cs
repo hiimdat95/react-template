@@ -28,6 +28,7 @@ namespace liyobe.Data
                 return new AppDbContext(builder.Options);
             }
         }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
