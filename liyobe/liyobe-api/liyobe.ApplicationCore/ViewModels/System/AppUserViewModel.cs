@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace liyobe.ApplicationCore.ViewModels.System
 {
-    public class UserViewModel
+    public class AppUserViewModel
     {
-        public UserViewModel()
+        public AppUserViewModel()
         {
             Roles = new List<string>();
         }

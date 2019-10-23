@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using liyobe.Infrastructure.Interfaces.ISpecification;
+using liyobe.Infrastructure.SharedKernel;
+using System.Collections.Generic;
 
 namespace liyobe.Infrastructure.Interfaces.IRepository
 {

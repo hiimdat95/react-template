@@ -2,7 +2,7 @@
 
 namespace liyobe.ApplicationCore.ViewModels.System
 {
-    public class UserRoleViewModel
+    public class AppUserRoleViewModel
     {
         public Guid? Id { set; get; }
 

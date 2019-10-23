@@ -1,4 +1,6 @@
 ﻿using liyobe.Data;
+using liyobe.Infrastructure.Interfaces.IRepository;
+using liyobe.Infrastructure.Interfaces.IUnitOfWork;
 using liyobe.Models.Entities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -7,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace liyobe.WebApi
 {
@@ -26,14 +29,36 @@ namespace liyobe.WebApi
             services.AddDbContext<AppDbContext>(
                 options => options.UseSqlServer(connectionString));
 
-            services.AddIdentity<AppUsers, IdentityRole>()
+            services.AddIdentity<AppUsers, AppRoles>()
                 .AddEntityFrameworkStores<AppDbContext>()
                 .AddDefaultTokenProviders();
 
+            // Configure Identity
             services.Configure<IdentityOptions>(options =>
             {
+                // Password settings
+                options.Password.RequireDigit = true;
                 options.Password.RequiredLength = 6;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireLowercase = false;
+
+                // Lockout settings
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
+                options.Lockout.MaxFailedAccessAttempts = 10;
+
+                // User settings
+                options.User.RequireUniqueEmail = true;
             });
+
+            // Add application services.
+            services.AddScoped<UserManager<AppUsers>, UserManager<AppUsers>>();
+            services.AddScoped<RoleManager<AppRoles>, RoleManager<AppRoles>>();
+
+            services.AddTransient(typeof(IUnitOfWork), typeof(EFUnitOfWork));
+            services.AddTransient(typeof(IAsyncRepository<,>), typeof(EFRepository<,>));
+
+            services.AddTransient<DbInitializer>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
@@ -44,7 +69,12 @@ namespace liyobe.WebApi
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            else
+            {
+                app.UseExceptionHandler("/error");
+            }
+            app.UseStaticFiles();
+            app.UseHttpsRedirection();
             app.UseMvc();
         }
     }

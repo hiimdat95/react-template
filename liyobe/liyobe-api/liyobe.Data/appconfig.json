@@ -1,11 +1,5 @@
 {
-  "ConnectionStrings": {
+   "ConnectionStrings": {
     "DefaultConnection": "Data Source=.;Initial Catalog=LiYoBe;Persist Security Info=True;User ID=sa;Password=Tek_1234;"
-  },
-  "Logging": {
-    "LogLevel": {
-      "Default": "Warning"
-    }
-  },
-  "AllowedHosts": "*"
+  }
 }

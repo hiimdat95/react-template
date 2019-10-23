@@ -1,5 +1,7 @@
-﻿using System;
+﻿using liyobe.Infrastructure.Interfaces.ISpecification;
+using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace liyobe.ApplicationCore.Specifications
 {
