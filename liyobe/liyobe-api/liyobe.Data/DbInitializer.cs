@@ -1,6 +1,7 @@
 ﻿using liyobe.Models.Entities;
 using Microsoft.AspNetCore.Identity;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -85,41 +86,41 @@ namespace liyobe.Data
             //        Lng = 105.7894758
             //    });
             //}
-            //if (_context.Functions.Count() == 0)
-            //{
-            //    _context.Functions.AddRange(new List<Function>()
-            //    {
-            //        new Function() {Id = "SYSTEM", Name = "System",ParentId = null,SortOrder = 1,Status = true,URL = "/",IconCss = "fa-desktop"  },
-            //        new Function() {Id = "ROLE", Name = "Role",ParentId = "SYSTEM",SortOrder = 1,Status = true,URL = "/admin/role/index",IconCss = "fa-home"  },
-            //        new Function() {Id = "FUNCTION", Name = "Function",ParentId = "SYSTEM",SortOrder = 2,Status = true,URL = "/admin/function/index",IconCss = "fa-home"  },
-            //        new Function() {Id = "USER", Name = "User",ParentId = "SYSTEM",SortOrder =3,Status = true,URL = "/admin/user/index",IconCss = "fa-home"  },
-            //        new Function() {Id = "ACTIVITY", Name = "Activity",ParentId = "SYSTEM",SortOrder = 4,Status = true,URL = "/admin/activity/index",IconCss = "fa-home"  },
-            //        new Function() {Id = "ERROR", Name = "Error",ParentId = "SYSTEM",SortOrder = 5,Status = true,URL = "/admin/error/index",IconCss = "fa-home"  },
-            //        new Function() {Id = "SETTING", Name = "Configuration",ParentId = "SYSTEM",SortOrder = 6,Status = true,URL = "/admin/setting/index",IconCss = "fa-home"  },
-
-            //        new Function() {Id = "PRODUCT",Name = "Product Management",ParentId = null,SortOrder = 2,Status = true,URL = "/",IconCss = "fa-chevron-down"  },
-            //        new Function() {Id = "PRODUCT_CATEGORY",Name = "Category",ParentId = "PRODUCT",SortOrder =1,Status = true,URL = "/admin/productcategory/index",IconCss = "fa-chevron-down"  },
-            //        new Function() {Id = "PRODUCT_LIST",Name = "Product",ParentId = "PRODUCT",SortOrder = 2,Status = true,URL = "/admin/product/index",IconCss = "fa-chevron-down"  },
-            //        new Function() {Id = "BILL",Name = "Bill",ParentId = "PRODUCT",SortOrder = 3,Status = true,URL = "/admin/bill/index",IconCss = "fa-chevron-down"  },
-
-            //        new Function() {Id = "CONTENT",Name = "Content",ParentId = null,SortOrder = 3,Status = true,URL = "/",IconCss = "fa-table"  },
-            //        new Function() {Id = "BLOG",Name = "Blog",ParentId = "CONTENT",SortOrder = 1,Status = true,URL = "/admin/blog/index",IconCss = "fa-table"  },
-            //        new Function() {Id = "PAGE",Name = "Page",ParentId = "CONTENT",SortOrder = 2,Status = true,URL = "/admin/page/index",IconCss = "fa-table"  },
-
-            //        new Function() {Id = "UTILITY",Name = "Utilities",ParentId = null,SortOrder = 4,Status = true,URL = "/",IconCss = "fa-clone"  },
-            //        new Function() {Id = "FOOTER",Name = "Footer",ParentId = "UTILITY",SortOrder = 1,Status = true,URL = "/admin/footer/index",IconCss = "fa-clone"  },
-            //        new Function() {Id = "FEEDBACK",Name = "Feedback",ParentId = "UTILITY",SortOrder = 2,Status = true,URL = "/admin/feedback/index",IconCss = "fa-clone"  },
-            //        new Function() {Id = "ANNOUNCEMENT",Name = "Announcement",ParentId = "UTILITY",SortOrder = 3,Status = true,URL = "/admin/announcement/index",IconCss = "fa-clone"  },
-            //        new Function() {Id = "CONTACT",Name = "Contact",ParentId = "UTILITY",SortOrder = 4,Status = true,URL = "/admin/contact/index",IconCss = "fa-clone"  },
-            //        new Function() {Id = "SLIDE",Name = "Slide",ParentId = "UTILITY",SortOrder = 5,Status = true,URL = "/admin/slide/index",IconCss = "fa-clone"  },
-            //        new Function() {Id = "ADVERTISMENT",Name = "Advertisment",ParentId = "UTILITY",SortOrder = 6,Status = true,URL = "/admin/advertistment/index",IconCss = "fa-clone"  },
-
-            //        new Function() {Id = "REPORT",Name = "Report",ParentId = null,SortOrder = 5,Status = true,URL = "/",IconCss = "fa-bar-chart-o"  },
-            //        new Function() {Id = "REVENUES",Name = "Revenue report",ParentId = "REPORT",SortOrder = 1,Status = true,URL = "/admin/report/revenues",IconCss = "fa-bar-chart-o"  },
-            //        new Function() {Id = "ACCESS",Name = "Visitor Report",ParentId = "REPORT",SortOrder = 2,Status = true,URL = "/admin/report/visitor",IconCss = "fa-bar-chart-o"  },
-            //        new Function() {Id = "READER",Name = "Reader Report",ParentId = "REPORT",SortOrder = 3,Status = true,URL = "/admin/report/reader",IconCss = "fa-bar-chart-o"  },
-            //    });
-            //}
+            if (_context.Locales.Count() == 0)
+            {
+                _context.Locales.AddRange(new List<Locales>()
+                {
+                    new Locales() { Id = "en", LocaleName = "English", Description = "English", SortOrder = 1, Status = true },
+                    new Locales() { Id = "vi", LocaleName = "Vietnamese", Description = "Vietnamese", SortOrder = 2, Status = true },
+                    new Locales() { Id = "ko", LocaleName = "Korean", Description = "Korean", SortOrder = 3, Status = true },
+                    new Locales() { Id = "ja", LocaleName = "Japanese", Description = "Japanese", SortOrder = 4, Status = true },
+                    new Locales() { Id = "zh", LocaleName = "Chinese", Description = "Chinese", SortOrder = 5, Status = true },
+                });
+            }
+            if (_context.Functions.Count() == 0)
+            {
+                _context.Functions.AddRange(new List<Functions>()
+                {
+                    new Functions() {Id="DASHBOARD",Name="DASHBOARD",ParentId=null,SortOrder=0,Status=true,URL="/dashboard",IconCss="simple-icon-home"},
+                    new Functions() {Id="SYSTEMMANAGE",Name="SYSTEMMANAGE",ParentId=null,SortOrder=2,Status=true,URL="/dashboard/system",IconCss="simple-icon-settings"},
+                    new Functions() {Id="FUNCTION",Name="FUNCTION",ParentId="SYSTEMMANAGE",SortOrder=2,Status=true,URL="/dashboard/system/function",IconCss="simple-icon-grid"},
+                    new Functions() {Id="SETTING",Name="SETTING",ParentId="SYSTEMMANAGE",SortOrder=4,Status=true,URL="/dashboard/system/setting",IconCss="simple-icon-screen-desktop"},
+                    new Functions() {Id="LOCALE",Name="LOCALE",ParentId="SYSTEMMANAGE",SortOrder=4,Status=true,URL="/dashboard/system/locale",IconCss="simple-icon-globe"},
+                    new Functions() {Id="IMAGE",Name="IMAGE",ParentId="SYSTEMMANAGE",SortOrder=4,Status=true,URL="/dashboard/system/image",IconCss="simple-icon-camera"},
+                    new Functions() {Id="ACCOUNTMANAGE",Name="ACCOUNTMANAGE",ParentId=null,SortOrder=1,Status=true,URL="/dashboard/account",IconCss="simple-icon-user"},
+                    new Functions() {Id="ROLE",Name="ROLE",ParentId="ACCOUNTMANAGE",SortOrder=3,Status=true,URL="/dashboard/account/role",IconCss="simple-icon-briefcase"},
+                    new Functions() {Id="USER",Name="USER",ParentId="ACCOUNTMANAGE",SortOrder=2,Status=true,URL="/dashboard/account/user",IconCss="simple-icon-people"},
+                    new Functions() {Id="PERMISSION",Name="PERMISSION",ParentId="ACCOUNTMANAGE",SortOrder=4,Status=true,URL="/dashboard/account/permission",IconCss="simple-icon-list"},
+                    new Functions() {Id="CHANGEPASS",Name="CHANGEPASS",ParentId="ACCOUNTMANAGE",SortOrder=4,Status=true,URL="/dashboard/account/changepass",IconCss="simple-icon-lock-open"},
+                    new Functions() {Id="PAGELANDING",Name="PAGELANDING",ParentId=null,SortOrder=3,Status=true,URL="/dashboard/pagelanding/",IconCss="simple-icon-screen-desktop"},
+                    new Functions() {Id="HEADMENU",Name="HEADMENU",ParentId="PAGELANDING",SortOrder=1,Status=true,URL="/dashboard/pagelanding/headmenu",IconCss="simple-icon-drawer"},
+                    new Functions() {Id="SECONDMENU",Name="SECONDMENU",ParentId="PAGELANDING",SortOrder=2,Status=true,URL="/dashboard/pagelanding/secondmenu",IconCss="simple-icon-drawer"},
+                    new Functions() {Id="CAROUSELHOME",Name="CAROUSELHOME",ParentId="PAGELANDING",SortOrder=3,Status=true,URL="/dashboard/pagelanding/carouselhome",IconCss="simple-icon-film"},
+                    new Functions() {Id="FEATURECAROUSELHOME",Name="FEATURECAROUSELHOME",ParentId="PAGELANDING",SortOrder=4,Status=true,URL="/dashboard/pagelanding/featurecarouselhome",IconCss="simple-icon-film"},
+                    new Functions() {Id="TOUR",Name="TOUR",ParentId="PAGELANDING",SortOrder=5,Status=true,URL="/dashboard/pagelanding/tour",IconCss="simple-icon-plane"},
+                    new Functions() {Id="CONFIG",Name="CONFIG",ParentId="PAGELANDING",SortOrder=6,Status=true,URL="/dashboard/pagelanding/config",IconCss="simple-icon-screen-desktop"},
+                });
+            }
 
             //if (_context.Footers.Count(x => x.Id == CommonConstants.DefaultFooterId) == 0)
             //{

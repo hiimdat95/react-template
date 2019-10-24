@@ -20,6 +20,9 @@ namespace liyobe.Data
 
         public DbSet<AppUsers> AppUsers { get; set; }
         public DbSet<AppRoles> AppRoles { get; set; }
+        public DbSet<Locales> Locales { get; set; }
+
+        public DbSet<Functions> Functions { get; set; }
 
         public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<AppDbContext>
         {

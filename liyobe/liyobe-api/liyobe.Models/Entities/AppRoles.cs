@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace liyobe.Models.Entities
 {
     [Table(TablesConstant.AppRoles)]
-    public class AppRoles : IdentityRole<Guid>
+    public class AppRoles : IdentityRole<Guid> 
     {
         public AppRoles() : base()
         {
