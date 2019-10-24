@@ -1,7 +1,11 @@
-﻿using liyobe.Data;
+﻿using AutoMapper;
+using liyobe.ApplicationCore.AutoMapper;
+using liyobe.ApplicationCore.Interfaces;
+using liyobe.Data;
 using liyobe.Infrastructure.Interfaces.IRepository;
 using liyobe.Infrastructure.Interfaces.IUnitOfWork;
 using liyobe.Models.Entities;
+using liyobe.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -9,6 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Swashbuckle.AspNetCore.Swagger;
 using System;
 
 namespace liyobe.WebApi
@@ -51,14 +56,22 @@ namespace liyobe.WebApi
                 options.User.RequireUniqueEmail = true;
             });
 
+            services.AddAutoMapper(typeof(Startup).Assembly);
             // Add application services.
             services.AddScoped<UserManager<AppUsers>, UserManager<AppUsers>>();
             services.AddScoped<RoleManager<AppRoles>, RoleManager<AppRoles>>();
 
+            services.AddSingleton(AutoMapperConfig.RegisterMappings().CreateMapper());
+            //services.AddScoped<IMapper>(sp => new Mapper(sp.GetRequiredService<AutoMapper.IConfigurationProvider>(), sp.GetService));
             services.AddTransient(typeof(IUnitOfWork), typeof(EFUnitOfWork));
             services.AddTransient(typeof(IAsyncRepository<,>), typeof(EFRepository<,>));
+            services.AddTransient<IFunctionsService, FunctionsService>();
 
             services.AddTransient<DbInitializer>();
+
+            services.AddSwaggerGen(c => {
+                c.SwaggerDoc("v1", new Info { Title = "Employee API", Version = "V1" });
+            });
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
@@ -74,6 +87,12 @@ namespace liyobe.WebApi
                 app.UseExceptionHandler("/error");
             }
             app.UseStaticFiles();
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.DocumentTitle = "Swagger UI - Quick Application";
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "QuickApp API V1");
+            });
             app.UseHttpsRedirection();
             app.UseMvc();
         }
