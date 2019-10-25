@@ -1,10 +1,10 @@
 ﻿{
   "$schema": "http://json.schemastore.org/launchsettings.json",
   "iisSettings": {
-    "windowsAuthentication": false,
-    "anonymousAuthentication": true,
+    "windowsAuthentication": false, 
+    "anonymousAuthentication": true, 
     "iisExpress": {
-      "applicationUrl": "http://localhost:64491",
+      "applicationUrl": "http://localhost:64660",
       "sslPort": 0
     }
   },
@@ -17,11 +17,11 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "liyobe.WebApi": {
+    "liyobe.OrdersApi": {
       "commandName": "Project",
-      "launchBrowser": false,
-      "launchUrl": "api/values",
-      "applicationUrl": "http://localhost:5000",
+      "launchBrowser": true,
+      "launchUrl": "",
+      "applicationUrl": "http://localhost:7002",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
