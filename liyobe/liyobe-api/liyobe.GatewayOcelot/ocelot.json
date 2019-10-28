@@ -46,16 +46,16 @@
     }
   ],
   "SwaggerEndPoints": [
-    {
-      "Key": "liyobe",
-      "Config": [
-        {
-          "Name": "liyobe API",
-          "Version": "v1",
-          "Url": "http://localhost:5000/swagger/v1/swagger.json"
-        }
-      ]
-    }
+    //{
+    //  "Key": "liyobe",
+    //  "Config": [
+    //    {
+    //      "Name": "liyobe API",
+    //      "Version": "v1",
+    //      "Url": "http://localhost:5000/swagger/v1/swagger.json"
+    //    }
+    //  ]
+    //}
   ],
   "Aggregates": [
     {

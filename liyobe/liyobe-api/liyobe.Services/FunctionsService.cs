@@ -32,13 +32,13 @@ namespace liyobe.Services
         //{
         //    return _functionRepository.GetByIdAsync(id) != null;
         //}
-        public async Task<FunctionsListViewModel> GetById(string functionId)
+        public async Task<FunctionListViewModel> GetById(string functionId)
         {
             var function = (await _functionRepository.ListAllAsync()).AsEnumerable().Where(x => x.Id == functionId).FirstOrDefault();
-            return _mapper.Map<Functions, FunctionsListViewModel>(function);
+            return _mapper.Map<Functions, FunctionListViewModel>(function);
         }
 
-        public void Add(FunctionsListViewModel functionVm)
+        public void Add(FunctionListViewModel functionVm)
         {
             var function = _mapper.Map<Functions>(functionVm);
             _functionRepository.AddAsync(function);
@@ -49,16 +49,16 @@ namespace liyobe.Services
             await _functionRepository.DeleteAsync((await _functionRepository.ListAllAsync()).AsQueryable().Where(x => x.Id == functionId).FirstOrDefault());
         }
 
-        public async Task<List<FunctionsListViewModel>> GetAll()
+        public async Task<List<FunctionListViewModel>> GetAll()
         {
             var query = await _functionRepository.ListAllAsync();
-            return _mapper.Map<List<Functions>, List<FunctionsListViewModel>>(query);
+            return _mapper.Map<List<Functions>, List<FunctionListViewModel>>(query);
         }
 
-        public async Task<IEnumerable<FunctionsListViewModel>> GetAllWithParentId(string parentId)
+        public async Task<IEnumerable<FunctionListViewModel>> GetAllWithParentId(string parentId)
         {
-            var configuration = new MapperConfiguration(cfg => cfg.CreateMap<Functions, FunctionsListViewModel>());
-            var lstFunctionByParent = (await _functionRepository.ListAllAsync()).AsQueryable().Where(x => x.ParentId == parentId).ProjectTo<FunctionsListViewModel>(configuration);
+            var configuration = new MapperConfiguration(cfg => cfg.CreateMap<Functions, FunctionListViewModel>());
+            var lstFunctionByParent = (await _functionRepository.ListAllAsync()).AsQueryable().Where(x => x.ParentId == parentId).ProjectTo<FunctionListViewModel>(configuration);
             return lstFunctionByParent;
         }
 
@@ -67,7 +67,7 @@ namespace liyobe.Services
             _unitOfWork.Commit();
         }
 
-        public async void Update(FunctionsListViewModel functionVm)
+        public async void Update(FunctionListViewModel functionVm)
         {
             var functionDb = (await _functionRepository.ListAllAsync()).AsQueryable().Where(x => x.Id == functionVm.Id).FirstOrDefault();
             var function = _mapper.Map<Functions>(functionVm);

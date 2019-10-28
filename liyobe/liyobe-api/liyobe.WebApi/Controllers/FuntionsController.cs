@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using liyobe.ApplicationCore.Interfaces;
-using liyobe.Services;
+﻿using liyobe.ApplicationCore.Interfaces;
 using liyobe.Utilities.Constants;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace liyobe.WebApi.Controllers
 {
@@ -22,13 +18,14 @@ namespace liyobe.WebApi.Controllers
 
         // GET api/values
         [HttpGet]
-        [Route(RoutesConstant.FunctionGetAll)]
+        [Route( RoutesConstant.GetAll)]
         public async Task<IActionResult> GetAll()
         {
             return Ok(await _functionService.GetAll());
         }
+
         [HttpGet]
-        [Route(RoutesConstant.FunctionDetail)]
+        [Route( RoutesConstant.Detail)]
         public async Task<IActionResult> Detail(string functionId)
         {
             return Ok(await _functionService.GetById(functionId));

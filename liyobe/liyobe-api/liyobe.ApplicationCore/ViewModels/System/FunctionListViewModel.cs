@@ -2,7 +2,7 @@
 
 namespace liyobe.ApplicationCore.ViewModels.System
 {
-    public class FunctionsListViewModel
+    public class FunctionListViewModel
     {
         public string Id { get; set; }
 

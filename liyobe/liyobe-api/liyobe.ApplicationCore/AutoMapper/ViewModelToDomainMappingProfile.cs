@@ -11,7 +11,7 @@ namespace liyobe.ApplicationCore.AutoMapper
             //CreateMap<AppUserViewModel, AppUser>()
             //        .ConstructUsing(c => new AppUser(c.Id.GetValueOrDefault(Guid.Empty), c.FullName, c.UserName,
             //        c.Email, c.PhoneNumber, c.Avatar, c.Status));
-            CreateMap<FunctionsListViewModel, Functions>();
+            CreateMap<FunctionListViewModel, Functions>();
         }
     }
 }
