@@ -17,5 +17,7 @@ namespace liyobe.ApplicationCore.Interfaces
         Task<AppUserViewModel> GetById(string id);
 
         Task UpdateAsync(AppUserViewModel userVm);
+
+        AppUserViewModel Authenticate(string userName, string passWord);
     }
 }

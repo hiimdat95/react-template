@@ -1,4 +1,5 @@
 ﻿using liyobe.Models.Entities;
+using liyobe.Utilities.Constants;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -32,8 +33,7 @@ namespace liyobe.Data
                     .SetBasePath(Directory.GetCurrentDirectory())
                     .AddJsonFile("appconfig.json").Build();
                 var builder = new DbContextOptionsBuilder<AppDbContext>();
-                var connectionString = configuration.GetConnectionString("DefaultConnection");
-                builder.UseSqlServer(connectionString);
+                builder.UseSqlServer(configuration.GetConnectionString("DefaultConnection")).UseOpenIddict() ;
                 return new AppDbContext(builder.Options);
             }
         }

@@ -1,10 +1,9 @@
 ﻿using liyobe.Infrastructure.Interfaces.ISpecification;
-using liyobe.Infrastructure.SharedKernel;
 using System.Collections.Generic;
 
 namespace liyobe.Infrastructure.Interfaces.IRepository
 {
-    public interface IRepository<T> where T : BaseEntity<T>
+    public interface IRepository<T, K> where T : class
     {
         T GetById(int id);
 
@@ -14,7 +13,7 @@ namespace liyobe.Infrastructure.Interfaces.IRepository
 
         IEnumerable<T> List(ISpecification<T> spec);
 
-        T Add(T entity);
+        void Add(T entity);
 
         void Update(T entity);
 

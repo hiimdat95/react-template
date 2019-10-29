@@ -6,8 +6,8 @@ namespace liyobe.ApplicationCore.Interfaces
 {
     public interface IFunctionsService
     {
-        Task<List<FunctionsListViewModel>> GetAll();
+        Task<List<FunctionListViewModel>> GetAll();
 
-        Task<FunctionsListViewModel> GetById(string functionId);
+        Task<FunctionListViewModel> GetById(string functionId);
     }
 }
