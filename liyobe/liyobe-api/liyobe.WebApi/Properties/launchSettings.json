@@ -19,7 +19,7 @@
     },
     "liyobe.WebApi": {
       "commandName": "Project",
-      "launchBrowser": false,
+      "launchBrowser": true,
       "launchUrl": "api/values",
       "applicationUrl": "http://localhost:5000",
       "environmentVariables": {

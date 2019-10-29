@@ -25,13 +25,15 @@ namespace liyobe.WebApi.Controllers
         [Route(RoutesConstant.FunctionGetAll)]
         public async Task<IActionResult> GetAll()
         {
-            return Ok(await _functionService.GetAll());
+            var listFunction = await _functionService.GetAll();
+            return Ok(listFunction);
         }
         [HttpGet]
         [Route(RoutesConstant.FunctionDetail)]
         public async Task<IActionResult> Detail(string functionId)
         {
-            return Ok(await _functionService.GetById(functionId));
+            var function = await _functionService.GetById(functionId);
+            return Ok(function);
         }
     }
 }
