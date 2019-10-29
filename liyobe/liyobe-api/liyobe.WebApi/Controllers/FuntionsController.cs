@@ -22,13 +22,13 @@ namespace liyobe.WebApi.Controllers
 
         // GET api/values
         [HttpGet]
-        [Route(RoutesConstant.FunctionGetAll)]
+        [Route(RoutesConstant.GetAll)]
         public async Task<IActionResult> GetAll()
         {
             return Ok(await _functionService.GetAll());
         }
         [HttpGet]
-        [Route(RoutesConstant.FunctionDetail)]
+        [Route(RoutesConstant.Detail)]
         public async Task<IActionResult> Detail(string functionId)
         {
             return Ok(await _functionService.GetById(functionId));
