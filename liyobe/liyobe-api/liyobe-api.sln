@@ -19,13 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "liyobe.Infrastructure", "li
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "liyobe.Utilities", "liyobe.Utilities\liyobe.Utilities.csproj", "{2117AFEB-3B8D-4998-8FF8-C392C0470A52}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "liyobe.WebApi", "liyobe.WebApi\liyobe.WebApi.csproj", "{7D1BFA2E-DFCE-49D9-98F0-9D3AFD856A43}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "liyobe.GatewayOcelot", "liyobe.GatewayOcelot\liyobe.GatewayOcelot.csproj", "{0150441F-5D2A-45CD-9716-B00BC80E0B7A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "liyobe.CatalogApi", "liyobe.External\liyobe.CatalogApi.csproj", "{D174C344-8B54-47B2-8A1B-D05EA760573E}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "liyobe.OrdersApi", "liyobe.OrdersApi\liyobe.OrdersApi.csproj", "{A961E6C6-9B41-4D7D-B999-E378851BB55E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "liyobe.WebApi", "liyobe.WebApi\liyobe.WebApi.csproj", "{7D1BFA2E-DFCE-49D9-98F0-9D3AFD856A43}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,18 +55,6 @@ Global
 		{7D1BFA2E-DFCE-49D9-98F0-9D3AFD856A43}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7D1BFA2E-DFCE-49D9-98F0-9D3AFD856A43}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7D1BFA2E-DFCE-49D9-98F0-9D3AFD856A43}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0150441F-5D2A-45CD-9716-B00BC80E0B7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0150441F-5D2A-45CD-9716-B00BC80E0B7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0150441F-5D2A-45CD-9716-B00BC80E0B7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0150441F-5D2A-45CD-9716-B00BC80E0B7A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D174C344-8B54-47B2-8A1B-D05EA760573E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D174C344-8B54-47B2-8A1B-D05EA760573E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D174C344-8B54-47B2-8A1B-D05EA760573E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D174C344-8B54-47B2-8A1B-D05EA760573E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A961E6C6-9B41-4D7D-B999-E378851BB55E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A961E6C6-9B41-4D7D-B999-E378851BB55E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A961E6C6-9B41-4D7D-B999-E378851BB55E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A961E6C6-9B41-4D7D-B999-E378851BB55E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
