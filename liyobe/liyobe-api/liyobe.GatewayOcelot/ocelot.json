@@ -1,0 +1,77 @@
+{
+  "ReRoutes": [
+    {
+      "DownstreamPathTemplate": "/api/currencies",
+      "DownstreamScheme": "http",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7001
+        }
+      ],
+      "UpstreamPathTemplate": "/catalog-api/currencies",
+      "DelegatingHandlers": [ "ConvertStatusCodeHandler" ],
+      "Key": "Catalogs"
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/orders",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7002
+        }
+      ],
+      "UpstreamHttpMethod": [ "Get" ],
+      "UpstreamPathTemplate": "/orders-api/orders",
+      "DelegatingHandlers": [ "ConvertStatusCodeHandler" ],
+      "Key": "Orders"
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/{catchAll}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5000
+        }
+      ],
+      "UpstreamHttpMethod": [ "Get" ],
+      "DelegatingHandlers": [ "ConvertStatusCodeHandler" ],
+      "UpstreamPathTemplate": "/liyobe/{catchAll}",
+      "SwaggerKey": "liyobe"
+    }
+  ],
+  "SwaggerEndPoints": [
+    //{
+    //  "Key": "liyobe",
+    //  "Config": [
+    //    {
+    //      "Name": "liyobe API",
+    //      "Version": "v1",
+    //      "Url": "http://localhost:5000/swagger/v1/swagger.json"
+    //    }
+    //  ]
+    //}
+  ],
+  "Aggregates": [
+    {
+      "ReRouteKeys": [
+        "Orders",
+        "Catalogs"
+      ],
+      "UpstreamPathTemplate": "/api/orderCatalog"
+    }
+  ],
+  "GlobalConfiguration": {
+    //"ServiceDiscoveryProvider": {
+    //  "Host": "consul",
+    //  "Port": 8500,
+    //  "Type": "Consul"
+    //}
+    "BaseUrl": "http://localhost:7000"
+  }
+}
