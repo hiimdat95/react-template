@@ -6,17 +6,16 @@ using liyobe.Infrastructure.Interfaces.IRepository;
 using liyobe.Infrastructure.Interfaces.IUnitOfWork;
 using liyobe.Models.Entities;
 using liyobe.Services;
-using liyobe.Utilities.Constants;
 using liyobe.WebApi.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
 using System;
+using System.Collections.Generic;
 
 namespace liyobe.WebApi
 {
@@ -67,8 +66,6 @@ namespace liyobe.WebApi
                 // User settings
                 options.User.RequireUniqueEmail = true;
             });
-            
-
 
             services.AddAutoMapper(typeof(Startup).Assembly);
             // Add application services.
@@ -83,10 +80,20 @@ namespace liyobe.WebApi
 
             services.AddTransient<DbInitializer>();
 
-            services.AddSwaggerGen(c => {
-                c.SwaggerDoc("v1", new Info { Title = "Employee API", Version = "V1" });
+            services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("v1", new Info { Title = "Employee API", Version = "V1" });
+                options.AddSecurityDefinition("oauth2", new OAuth2Scheme
+                {
+                    Flow = "implicit",
+                    AuthorizationUrl = "http://localhost:5000/connect/authorize",
+                    Scopes = new Dictionary<string, string> {
+                        { "api1", "DMy API" }
+                    }
+                });
             });
-            services.AddMvc().AddJsonOptions(options => {
+            services.AddMvc().AddJsonOptions(options =>
+            {
                 options.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
                 options.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented;
             });
