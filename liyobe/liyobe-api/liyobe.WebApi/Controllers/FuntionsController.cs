@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using liyobe.ApplicationCore.Interfaces;
 using liyobe.Services;
 using liyobe.Utilities.Constants;
+using liyobe.WebApi.Cache;
 using Microsoft.AspNetCore.Mvc;
 
 namespace liyobe.WebApi.Controllers
@@ -21,6 +22,7 @@ namespace liyobe.WebApi.Controllers
         }
 
         // GET api/values
+        [Cached(600)]
         [HttpGet]
         [Route(RoutesConstant.GetAll)]
         public async Task<IActionResult> GetAll()
