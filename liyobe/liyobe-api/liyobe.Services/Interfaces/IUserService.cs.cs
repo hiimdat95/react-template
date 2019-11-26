@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace liyobe.ApplicationCore.Interfaces
+namespace liyobe.Services.Interfaces
 {
     public interface IUserService
     {

@@ -8,13 +8,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace liyobe.Models.Entities
 {
     [Table(TablesConstant.AppUsers)]
-    public class AppUsers : IdentityUser<Guid>, IDateTracking, ISwitchable
+    public class AppUser : IdentityUser<Guid>, IDateTracking, ISwitchable
     {
-        public AppUsers()
+        public AppUser()
         {
         }
 
-        public AppUsers(Guid id, string fullName, string userName,
+        public AppUser(Guid id, string fullName, string userName,
             string email, string phoneNumber, string avatar, bool status)
         {
             Id = id;

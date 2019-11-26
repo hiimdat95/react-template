@@ -13,9 +13,9 @@ export const optionsGet = () => ({
   method: 'get',
   headers: {
     Accept: 'application/json',
-    Authorization: getLoggedInUser()
-      ? `JWT ${getLoggedInUser().access_token}`
-      : null,
+    // Authorization: getLoggedInUser()
+    //   ? `JWT ${getLoggedInUser().access_token}`
+    //   : null,
     'Content-Type': 'application/json',
   },
 });

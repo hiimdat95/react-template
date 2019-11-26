@@ -9,7 +9,7 @@ using System.IO;
 
 namespace liyobe.Data
 {
-    public class AppDbContext : IdentityDbContext<AppUsers, AppRoles, Guid>
+    public class AppDbContext : IdentityDbContext<AppUser, AppRole, Guid>
     {
         public AppDbContext(DbContextOptions<AppDbContext> options)
         : base(options)
@@ -18,11 +18,11 @@ namespace liyobe.Data
 
         public DbSet<SystemConfig> SystemConfigs { get; set; }
 
-        public DbSet<AppUsers> AppUsers { get; set; }
-        public DbSet<AppRoles> AppRoles { get; set; }
-        public DbSet<Locales> Locales { get; set; }
+        public DbSet<AppUser> AppUsers { get; set; }
+        public DbSet<AppRole> AppRoles { get; set; }
+        public DbSet<Locale> Locales { get; set; }
 
-        public DbSet<Functions> Functions { get; set; }
+        public DbSet<Function> Functions { get; set; }
 
         public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<AppDbContext>
         {
@@ -41,8 +41,8 @@ namespace liyobe.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<AppUsers>().ToTable("AppUsers").Property(p => p.Id).HasColumnName("UserId");
-            modelBuilder.Entity<AppRoles>().ToTable("AppRoles").Property(p => p.Id).HasColumnName("RoleId"); ;
+            modelBuilder.Entity<AppUser>().ToTable("AppUsers").Property(p => p.Id).HasColumnName("UserId");
+            modelBuilder.Entity<AppRole>().ToTable("AppRoles").Property(p => p.Id).HasColumnName("RoleId"); ;
             modelBuilder.Entity<IdentityUserClaim<Guid>>().ToTable("AppUserClaims")
                 .HasKey(x => x.Id);
 

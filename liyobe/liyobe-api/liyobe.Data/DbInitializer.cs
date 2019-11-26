@@ -10,10 +10,10 @@ namespace liyobe.Data
     public class DbInitializer
     {
         private readonly AppDbContext _context;
-        private UserManager<AppUsers> _userManager;
-        private RoleManager<AppRoles> _roleManager;
+        private UserManager<AppUser> _userManager;
+        private RoleManager<AppRole> _roleManager;
 
-        public DbInitializer(AppDbContext context, UserManager<AppUsers> userManager, RoleManager<AppRoles> roleManager)
+        public DbInitializer(AppDbContext context, UserManager<AppUser> userManager, RoleManager<AppRole> roleManager)
         {
             _context = context;
             _userManager = userManager;
@@ -24,19 +24,19 @@ namespace liyobe.Data
         {
             if (!_roleManager.Roles.Any())
             {
-                await _roleManager.CreateAsync(new AppRoles()
+                await _roleManager.CreateAsync(new AppRole()
                 {
                     Name = "Admin",
                     NormalizedName = "Admin",
                     Description = "Top manager"
                 });
-                await _roleManager.CreateAsync(new AppRoles()
+                await _roleManager.CreateAsync(new AppRole()
                 {
                     Name = "Staff",
                     NormalizedName = "Staff",
                     Description = "Staff"
                 });
-                await _roleManager.CreateAsync(new AppRoles()
+                await _roleManager.CreateAsync(new AppRole()
                 {
                     Name = "Customer",
                     NormalizedName = "Customer",
@@ -45,7 +45,7 @@ namespace liyobe.Data
             }
             if (!_userManager.Users.Any())
             {
-                await _userManager.CreateAsync(new AppUsers()
+                await _userManager.CreateAsync(new AppUser()
                 {
                     UserName = "admin",
                     FullName = "Administrator",
@@ -58,7 +58,7 @@ namespace liyobe.Data
                 var user = await _userManager.FindByNameAsync("admin");
                 await _userManager.AddToRoleAsync(user, "Admin");
 
-                await _userManager.CreateAsync(new AppUsers()
+                await _userManager.CreateAsync(new AppUser()
                 {
                     UserName = "ltdat",
                     FullName = "Le Tien Dat",
@@ -88,37 +88,37 @@ namespace liyobe.Data
             //}
             if (_context.Locales.Count() == 0)
             {
-                _context.Locales.AddRange(new List<Locales>()
+                _context.Locales.AddRange(new List<Locale>()
                 {
-                    new Locales() { Id = "en", LocaleName = "English", Description = "English", SortOrder = 1, Status = true },
-                    new Locales() { Id = "vi", LocaleName = "Vietnamese", Description = "Vietnamese", SortOrder = 2, Status = true },
-                    new Locales() { Id = "ko", LocaleName = "Korean", Description = "Korean", SortOrder = 3, Status = true },
-                    new Locales() { Id = "ja", LocaleName = "Japanese", Description = "Japanese", SortOrder = 4, Status = true },
-                    new Locales() { Id = "zh", LocaleName = "Chinese", Description = "Chinese", SortOrder = 5, Status = true },
+                    new Locale() { Id = "en", LocaleName = "English", Description = "English", SortOrder = 1, Status = true },
+                    new Locale() { Id = "vi", LocaleName = "Vietnamese", Description = "Vietnamese", SortOrder = 2, Status = true },
+                    new Locale() { Id = "ko", LocaleName = "Korean", Description = "Korean", SortOrder = 3, Status = true },
+                    new Locale() { Id = "ja", LocaleName = "Japanese", Description = "Japanese", SortOrder = 4, Status = true },
+                    new Locale() { Id = "zh", LocaleName = "Chinese", Description = "Chinese", SortOrder = 5, Status = true },
                 });
             }
             if (_context.Functions.Count() == 0)
             {
-                _context.Functions.AddRange(new List<Functions>()
+                _context.Functions.AddRange(new List<Function>()
                 {
-                    new Functions() {Id="DASHBOARD",Name="DASHBOARD",ParentId=null,SortOrder=0,Status=true,URL="/dashboard",IconCss="simple-icon-home"},
-                    new Functions() {Id="SYSTEMMANAGE",Name="SYSTEMMANAGE",ParentId=null,SortOrder=2,Status=true,URL="/dashboard/system",IconCss="simple-icon-settings"},
-                    new Functions() {Id="FUNCTION",Name="FUNCTION",ParentId="SYSTEMMANAGE",SortOrder=2,Status=true,URL="/dashboard/system/function",IconCss="simple-icon-grid"},
-                    new Functions() {Id="SETTING",Name="SETTING",ParentId="SYSTEMMANAGE",SortOrder=4,Status=true,URL="/dashboard/system/setting",IconCss="simple-icon-screen-desktop"},
-                    new Functions() {Id="LOCALE",Name="LOCALE",ParentId="SYSTEMMANAGE",SortOrder=4,Status=true,URL="/dashboard/system/locale",IconCss="simple-icon-globe"},
-                    new Functions() {Id="IMAGE",Name="IMAGE",ParentId="SYSTEMMANAGE",SortOrder=4,Status=true,URL="/dashboard/system/image",IconCss="simple-icon-camera"},
-                    new Functions() {Id="ACCOUNTMANAGE",Name="ACCOUNTMANAGE",ParentId=null,SortOrder=1,Status=true,URL="/dashboard/account",IconCss="simple-icon-user"},
-                    new Functions() {Id="ROLE",Name="ROLE",ParentId="ACCOUNTMANAGE",SortOrder=3,Status=true,URL="/dashboard/account/role",IconCss="simple-icon-briefcase"},
-                    new Functions() {Id="USER",Name="USER",ParentId="ACCOUNTMANAGE",SortOrder=2,Status=true,URL="/dashboard/account/user",IconCss="simple-icon-people"},
-                    new Functions() {Id="PERMISSION",Name="PERMISSION",ParentId="ACCOUNTMANAGE",SortOrder=4,Status=true,URL="/dashboard/account/permission",IconCss="simple-icon-list"},
-                    new Functions() {Id="CHANGEPASS",Name="CHANGEPASS",ParentId="ACCOUNTMANAGE",SortOrder=4,Status=true,URL="/dashboard/account/changepass",IconCss="simple-icon-lock-open"},
-                    new Functions() {Id="PAGELANDING",Name="PAGELANDING",ParentId=null,SortOrder=3,Status=true,URL="/dashboard/pagelanding/",IconCss="simple-icon-screen-desktop"},
-                    new Functions() {Id="HEADMENU",Name="HEADMENU",ParentId="PAGELANDING",SortOrder=1,Status=true,URL="/dashboard/pagelanding/headmenu",IconCss="simple-icon-drawer"},
-                    new Functions() {Id="SECONDMENU",Name="SECONDMENU",ParentId="PAGELANDING",SortOrder=2,Status=true,URL="/dashboard/pagelanding/secondmenu",IconCss="simple-icon-drawer"},
-                    new Functions() {Id="CAROUSELHOME",Name="CAROUSELHOME",ParentId="PAGELANDING",SortOrder=3,Status=true,URL="/dashboard/pagelanding/carouselhome",IconCss="simple-icon-film"},
-                    new Functions() {Id="FEATURECAROUSELHOME",Name="FEATURECAROUSELHOME",ParentId="PAGELANDING",SortOrder=4,Status=true,URL="/dashboard/pagelanding/featurecarouselhome",IconCss="simple-icon-film"},
-                    new Functions() {Id="TOUR",Name="TOUR",ParentId="PAGELANDING",SortOrder=5,Status=true,URL="/dashboard/pagelanding/tour",IconCss="simple-icon-plane"},
-                    new Functions() {Id="CONFIG",Name="CONFIG",ParentId="PAGELANDING",SortOrder=6,Status=true,URL="/dashboard/pagelanding/config",IconCss="simple-icon-screen-desktop"},
+                    new Function() {Id="DASHBOARD",Name="DASHBOARD",ParentId=null,SortOrder=0,Status=true,URL="/dashboard",IconCss="simple-icon-home"},
+                    new Function() {Id="SYSTEMMANAGE",Name="SYSTEMMANAGE",ParentId=null,SortOrder=2,Status=true,URL="/dashboard/system",IconCss="simple-icon-settings"},
+                    new Function() {Id="FUNCTION",Name="FUNCTION",ParentId="SYSTEMMANAGE",SortOrder=2,Status=true,URL="/dashboard/system/function",IconCss="simple-icon-grid"},
+                    new Function() {Id="SETTING",Name="SETTING",ParentId="SYSTEMMANAGE",SortOrder=4,Status=true,URL="/dashboard/system/setting",IconCss="simple-icon-screen-desktop"},
+                    new Function() {Id="LOCALE",Name="LOCALE",ParentId="SYSTEMMANAGE",SortOrder=4,Status=true,URL="/dashboard/system/locale",IconCss="simple-icon-globe"},
+                    new Function() {Id="IMAGE",Name="IMAGE",ParentId="SYSTEMMANAGE",SortOrder=4,Status=true,URL="/dashboard/system/image",IconCss="simple-icon-camera"},
+                    new Function() {Id="ACCOUNTMANAGE",Name="ACCOUNTMANAGE",ParentId=null,SortOrder=1,Status=true,URL="/dashboard/account",IconCss="simple-icon-user"},
+                    new Function() {Id="ROLE",Name="ROLE",ParentId="ACCOUNTMANAGE",SortOrder=3,Status=true,URL="/dashboard/account/role",IconCss="simple-icon-briefcase"},
+                    new Function() {Id="USER",Name="USER",ParentId="ACCOUNTMANAGE",SortOrder=2,Status=true,URL="/dashboard/account/user",IconCss="simple-icon-people"},
+                    new Function() {Id="PERMISSION",Name="PERMISSION",ParentId="ACCOUNTMANAGE",SortOrder=4,Status=true,URL="/dashboard/account/permission",IconCss="simple-icon-list"},
+                    new Function() {Id="CHANGEPASS",Name="CHANGEPASS",ParentId="ACCOUNTMANAGE",SortOrder=4,Status=true,URL="/dashboard/account/changepass",IconCss="simple-icon-lock-open"},
+                    new Function() {Id="PAGELANDING",Name="PAGELANDING",ParentId=null,SortOrder=3,Status=true,URL="/dashboard/pagelanding/",IconCss="simple-icon-screen-desktop"},
+                    new Function() {Id="HEADMENU",Name="HEADMENU",ParentId="PAGELANDING",SortOrder=1,Status=true,URL="/dashboard/pagelanding/headmenu",IconCss="simple-icon-drawer"},
+                    new Function() {Id="SECONDMENU",Name="SECONDMENU",ParentId="PAGELANDING",SortOrder=2,Status=true,URL="/dashboard/pagelanding/secondmenu",IconCss="simple-icon-drawer"},
+                    new Function() {Id="CAROUSELHOME",Name="CAROUSELHOME",ParentId="PAGELANDING",SortOrder=3,Status=true,URL="/dashboard/pagelanding/carouselhome",IconCss="simple-icon-film"},
+                    new Function() {Id="FEATURECAROUSELHOME",Name="FEATURECAROUSELHOME",ParentId="PAGELANDING",SortOrder=4,Status=true,URL="/dashboard/pagelanding/featurecarouselhome",IconCss="simple-icon-film"},
+                    new Function() {Id="TOUR",Name="TOUR",ParentId="PAGELANDING",SortOrder=5,Status=true,URL="/dashboard/pagelanding/tour",IconCss="simple-icon-plane"},
+                    new Function() {Id="CONFIG",Name="CONFIG",ParentId="PAGELANDING",SortOrder=6,Status=true,URL="/dashboard/pagelanding/config",IconCss="simple-icon-screen-desktop"},
                 });
             }
 

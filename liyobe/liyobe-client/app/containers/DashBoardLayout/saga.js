@@ -8,10 +8,9 @@ import { HIERACHY_REQUEST } from './constants';
 import * as actions from './actions';
 
 export function* getAllHierachy() {
-  const requestURL = `${URL}Function/GetAllHierachy`;
-  const options = optionsGet();
+  const requestURL = `${URL}function/getall`;
   try {
-    const response = yield call(request, requestURL, options);
+    const response = yield call(request, requestURL);
     if (response.success) {
       yield put(actions.hierachySuccess(response.data));
     } else {

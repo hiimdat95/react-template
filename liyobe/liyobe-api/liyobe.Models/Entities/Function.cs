@@ -7,13 +7,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace liyobe.Models.Entities
 {
     [Table(TablesConstant.Functions)]
-    public class Functions : BaseEntity<string>, ISwitchable, ISortable
+    public class Function : BaseEntity<string>, ISwitchable, ISortable
     {
-        public Functions()
+        public Function()
         {
         }
 
-        public Functions(string name, string url, string parentId, string iconCss, int sortOrder, bool status)
+        public Function(string name, string url, string parentId, string iconCss, int sortOrder, bool status)
         {
             this.Name = name;
             this.URL = url;

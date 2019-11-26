@@ -5,7 +5,7 @@ namespace liyobe.WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ValuesController : ControllerBase
+    public class ValueController : ControllerBase
     {
         // GET api/values
         [HttpGet]

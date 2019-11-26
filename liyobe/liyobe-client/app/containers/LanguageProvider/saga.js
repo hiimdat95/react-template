@@ -6,7 +6,7 @@ import { GET_LOCALE_REQUEST } from './constants';
 import * as actions from './actions';
 
 export function* getLocale() {
-  const requestURL = `${URL}Locale/GetDropdown`;
+  const requestURL = `${URL}locale/getall`;
   try {
     const response = yield call(request, requestURL);
     if (response.success) {

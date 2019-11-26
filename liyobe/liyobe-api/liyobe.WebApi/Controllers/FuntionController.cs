@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using liyobe.ApplicationCore.Interfaces;
-using liyobe.Services;
+using liyobe.Services.Interfaces;
 using liyobe.Utilities.Constants;
 using liyobe.WebApi.Cache;
-using Microsoft.AspNetCore.Mvc;
+
 
 namespace liyobe.WebApi.Controllers
 {
@@ -14,9 +11,9 @@ namespace liyobe.WebApi.Controllers
     [ApiController]
     public class FunctionsController : ControllerBase
     {
-        private IFunctionsService _functionService;
+        private IFunctionService _functionService;
 
-        public FunctionsController(IFunctionsService functionService)
+        public FunctionsController(IFunctionService functionService)
         {
             _functionService = functionService;
         }
@@ -29,6 +26,7 @@ namespace liyobe.WebApi.Controllers
         {
             return Ok(await _functionService.GetAll());
         }
+
         [HttpGet]
         [Route(RoutesConstant.Detail)]
         public async Task<IActionResult> Detail(string functionId)

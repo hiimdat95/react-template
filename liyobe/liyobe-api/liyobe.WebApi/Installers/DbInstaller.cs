@@ -17,7 +17,7 @@ namespace liyobe.WebApi.Installers
             services.AddDbContext<AppDbContext>(
                 options => options.UseSqlServer(connectionString));
 
-            services.AddIdentity<AppUsers, AppRoles>()
+            services.AddIdentity<AppUser, AppRole>()
                 .AddEntityFrameworkStores<AppDbContext>()
                 .AddDefaultTokenProviders();
 
@@ -33,7 +33,7 @@ namespace liyobe.WebApi.Installers
                 .AddInMemoryIdentityResources(IdentityConfigs.GetIdentityResources())
                 .AddInMemoryApiResources(IdentityConfigs.GetApiResources())
                 .AddInMemoryClients(IdentityConfigs.GetClients())
-                .AddAspNetIdentity<AppUsers>();
+                .AddAspNetIdentity<AppUser>();
 
             // Configure Identity
             services.Configure<IdentityOptions>(options =>

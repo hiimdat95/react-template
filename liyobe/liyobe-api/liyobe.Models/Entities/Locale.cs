@@ -10,13 +10,13 @@ using System.Text;
 namespace liyobe.Models.Entities
 {
     [Table(TablesConstant.Locales)]
-    public class Locales : BaseEntity<string>, ISwitchable, ISortable
+    public class Locale : BaseEntity<string>, ISwitchable, ISortable
     {
-        public Locales()
+        public Locale()
         {
 
         }
-        public Locales(string localeName, string description, bool status, int sortOrder)
+        public Locale(string localeName, string description, bool status, int sortOrder)
         {
             this.LocaleName = localeName;
             this.Description = description;

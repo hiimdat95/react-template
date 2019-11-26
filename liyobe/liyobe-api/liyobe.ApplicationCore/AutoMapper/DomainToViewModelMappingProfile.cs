@@ -11,9 +11,11 @@ namespace liyobe.ApplicationCore.AutoMapper
     {
         public DomainToViewModelMappingProfile()
         {
-            CreateMap<Functions, FunctionsListViewModel>();
-            //CreateMap<AppUser, AppUserViewModel>().ForMember(x => x.Password, o => o.MapFrom(y => y.PasswordHash));
-            //CreateMap<AppRole, AppRoleViewModel>();
+            CreateMap<Function, FunctionListViewModel>();
+            CreateMap<AppUser, AppUserViewModel>().ForMember(x => x.Password, o => o.MapFrom(y => y.PasswordHash));
+            CreateMap<AppRole, AppUserRoleViewModel>();
+            CreateMap<Locale, LocaleListViewModel>();
+
         }
     }
 }
