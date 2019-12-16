@@ -1,4 +1,5 @@
 ﻿using liyobe.ApplicationCore.ViewModels.System;
+using liyobe.Utilities.BusinessObjects;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,8 +9,7 @@ namespace liyobe.Services.Interfaces
 {
     public interface ILocaleService
     {
-        Task<List<LocaleListViewModel>> GetAll();
-
+        Task<GenericResult<List<LocaleListViewModel>>> GetAll();
         Task<LocaleListViewModel> GetById(string functionId);
     }
 }

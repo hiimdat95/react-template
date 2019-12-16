@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using liyobe.Utilities.BusinessObjects;
 
 namespace liyobe.Services.Implementations
 {
@@ -40,10 +41,10 @@ namespace liyobe.Services.Implementations
             await _asyncRepository.DeleteAsync((await _asyncRepository.ListAllAsync()).AsQueryable().Where(x => x.Id == functionId).FirstOrDefault());
         }
 
-        public async Task<List<LocaleListViewModel>> GetAll()
+        public async Task<GenericResult<List<LocaleListViewModel>>> GetAll()
         {
             var query = await _asyncRepository.ListAllAsync();
-            return _mapper.Map<List<Locale>, List<LocaleListViewModel>>(query);
+            return GenericResult<List<LocaleListViewModel>>.Succeed(_mapper.Map<List<Locale>, List<LocaleListViewModel>>(query));
         }
 
         public void Save()

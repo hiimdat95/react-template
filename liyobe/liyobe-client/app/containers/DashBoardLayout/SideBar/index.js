@@ -249,11 +249,13 @@ class Sidebar extends Component {
     const { hiarachy } = this.props.DashBoardLayout;
     let functionTree = null;
     if (!_isEmpty(hiarachy)) {
-      functionTree = _groupBy(hiarachy, 'parentId');
+      functionTree = _groupBy(hiarachy, 'ParentId');
+      console.log(functionTree);
       functionTree.null.forEach(item => {
         // eslint-disable-next-line no-param-reassign
-        item.children = functionTree[item._id];
+        item.children = functionTree[item.Id];
       });
+      console.log(functionTree);
       functionTree = functionTree.null;
     }
 
@@ -265,31 +267,31 @@ class Sidebar extends Component {
               option={{ suppressScrollX: true, wheelPropagation: false }}
             >
               <Nav vertical className="list-unstyled">
-                {_orderBy(functionTree, ['sortOrder'], ['true']).map(
+                {_orderBy(functionTree , ['SortOrder'], 1).map(
                   x =>
-                    x.isActive === 1 ? (
+                    x.selectedParentNoSubItem === 1 ? (
                       <NavItem
-                        key={x._id}
+                        key={x.Id}
                         className={classnames({
-                          active:
-                            (this.state.selectedParentMenu === x._id &&
-                              this.state.viewingParentMenu === x._id) ||
-                            this.state.viewingParentMenu === x._id,
+                          Status:
+                            (this.state.selectedParentMenu === x.Id &&
+                              this.state.viewingParentMenu === x.Id) ||
+                            this.state.viewingParentMenu === x.Id,
                         })}
                       >
                         <NavLink
-                          to={x.path}
+                          to={x.URL}
                           onClick={e => {
                             this.openSubMenu(
                               e,
-                              x._id,
+                              x.Id,
                               !_isEmpty(x.children),
-                              x.path,
+                              x.URL,
                             );
                           }}
                         >
-                          <i className={x.iconCss} />
-                          <FormattedMessage {...commonMessages[x._id]} />
+                          <i className={x.IconCss} />
+                          <FormattedMessage {...commonMessages[x.Id]} />
                         </NavLink>
                       </NavItem>
                     ) : null,
@@ -307,24 +309,24 @@ class Sidebar extends Component {
               {_map(
                 functionTree,
                 x =>
-                  x.isActive === 1 ? (
+                  x.Status === 1 ? (
                     <Nav
                       className={classnames({
                         'd-block':
-                          (this.state.selectedParentMenu === x._id &&
+                          (this.state.selectedParentMenu === x.Id &&
                             this.state.viewingParentMenu === '') ||
-                          this.state.viewingParentMenu === x._id,
+                          this.state.viewingParentMenu === x.Id,
                       })}
-                      data-parent={x._id}
-                      key={x._id}
+                      data-parent={x.Id}
+                      key={x.Id}
                     >
-                      {_orderBy(x.children, ['sortOrder'], ['true']).map(
+                      {_orderBy(x.children, ['SortOrder'], 1).map(
                         y =>
-                          y.isActive === 1 ? (
-                            <NavItem key={y._id}>
-                              <NavLink to={y.path}>
-                                <i className={y.iconCss} />
-                                <FormattedMessage {...commonMessages[y._id]} />
+                          y.Status === 1 ? (
+                            <NavItem key={y.Id}>
+                              <NavLink to={y.URL}>
+                                <i className={y.IconCss} />
+                                <FormattedMessage {...commonMessages[y.Id]} />
                               </NavLink>
                             </NavItem>
                           ) : null,

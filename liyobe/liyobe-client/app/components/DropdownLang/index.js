@@ -95,11 +95,11 @@ export class ChangeLanguage extends React.Component {
         <DropdownMenu right id="dropdownLang">
           {localeOptions.map(l => (
             <DropdownItem
-              onClick={() => this.props.onLocaleToggle(l._id)}
-              key={l._id}
+              onClick={() => this.props.onLocaleToggle(l.Id)}
+              key={l.Id}
             >
-              {this.flag(l._id)}
-              {formatMessage(commonMessage[l._id])}
+              {this.flag(l.Id)}
+              {formatMessage(commonMessage[l.Id])}
             </DropdownItem>
           ))}
         </DropdownMenu>

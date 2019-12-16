@@ -9,8 +9,8 @@ export function* getLocale() {
   const requestURL = `${URL}locale/getall`;
   try {
     const response = yield call(request, requestURL);
-    if (response.success) {
-      yield put(actions.getLocaleSuccess(response.data));
+    if (response.Metadata.Success) {
+      yield put(actions.getLocaleSuccess(response.Results[0]));
     } else {
       yield put(push('/error'));
     }

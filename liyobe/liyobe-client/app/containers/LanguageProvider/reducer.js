@@ -21,8 +21,8 @@ function languageProviderReducer(state = initialState, action) {
   switch (action.type) {
     case types.CHANGE_LOCALE:
       return state.set('locale', action.locale);
-    // case types.GET_LOCALE_SUCCESS:
-    //   return state.set('listLocales', action.response);
+    case types.GET_LOCALE_SUCCESS:
+      return state.set('listLocales', action.response);
     default:
       return state;
   }

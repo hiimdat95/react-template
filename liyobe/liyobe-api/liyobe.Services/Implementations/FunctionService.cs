@@ -5,6 +5,7 @@ using liyobe.Infrastructure.Interfaces.IRepository;
 using liyobe.Infrastructure.Interfaces.IUnitOfWork;
 using liyobe.Models.Entities;
 using liyobe.Services.Interfaces;
+using liyobe.Utilities.BusinessObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -55,10 +56,10 @@ namespace liyobe.Services.Implementations
             await _asyncRepository.DeleteAsync((await _asyncRepository.ListAllAsync()).AsQueryable().Where(x => x.Id == functionId).FirstOrDefault());
         }
 
-        public async Task<List<FunctionListViewModel>> GetAll()
+        public async Task<GenericResult<List<FunctionListViewModel>>> GetAll()
         {
             var query = await _asyncRepository.ListAllAsync();
-            return _mapper.Map<List<Function>, List<FunctionListViewModel>>(query);
+            return GenericResult<List<FunctionListViewModel>>.Succeed(_mapper.Map<List<Function>, List<FunctionListViewModel>>(query));
         }
 
         public async Task<IEnumerable<FunctionListViewModel>> GetAllWithParentId(string parentId)

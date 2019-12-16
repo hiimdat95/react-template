@@ -11,8 +11,9 @@ export function* getAllHierachy() {
   const requestURL = `${URL}function/getall`;
   try {
     const response = yield call(request, requestURL);
-    if (response.success) {
-      yield put(actions.hierachySuccess(response.data));
+    console.log(response.Metadata.Success);
+    if (response.Metadata.Success) {
+      yield put(actions.hierachySuccess(response.Results[0]));
     } else {
       yield put(push('/error'));
     }

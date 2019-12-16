@@ -6,6 +6,7 @@ using liyobe.Infrastructure.Interfaces.IUnitOfWork;
 using liyobe.Models.Entities;
 using liyobe.Services.Implementations;
 using liyobe.Services.Interfaces;
+using liyobe.WebApi.Infrastructure;
 using liyobe.WebApi.Installers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -84,6 +85,7 @@ namespace liyobe.WebApi
                 option.SwaggerEndpoint(swaggerOptions.UiEndpoint, swaggerOptions.Description);
             });
             app.UseCors(MyAllowSpecificOrigins);
+            app.UseMiddleware<CustomExceptionHandlerMiddleware>();
             app.UseMvc();
         }
     }
