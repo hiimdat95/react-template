@@ -47,12 +47,17 @@ namespace liyobe.WebApi
             services.InstallServicesInAssembly(_configuration);
             services.AddCors(options =>
             {
+                //options.AddPolicy(MyAllowSpecificOrigins,
+                //builder =>
+                //{
+                //    builder.WithOrigins("http://localhost:4001",
+                //                        "http://localhost:4002");
+
+                //});
                 options.AddPolicy(MyAllowSpecificOrigins,
-                builder =>
-                {
-                    builder.WithOrigins("http://localhost:4001",
-                                        "http://localhost:4002");
-                });
+                builder => builder.AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
             });
 
             services.AddMvc().AddJsonOptions(options =>

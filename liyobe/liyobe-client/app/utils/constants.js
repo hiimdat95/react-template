@@ -16,7 +16,7 @@ export const PART_DASHBOARD = '/dashboard';
 export const URL_UPLOAD = 'http://localhost:4000/upload';
 export const URL_SERVER = 'http://localhost:4000/';
 export const URL = 'http://localhost:4000/api/';
-export const URL_AUTH = 'http://localhost:4000/api/login';
+export const URL_AUTH = 'http://localhost:4000/connect/authorize';
 export const clientId = 'vntm_spa';
 export const clientSecret = '49C1A7E1-0C79-4A89-A3D6-A37998FG5R6';
 

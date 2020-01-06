@@ -27,10 +27,9 @@ export class DashBoardLayout extends Component {
     const { match } = this.props;
     const { containerClassnames } = this.props.DashBoardLayout;
     return (
-      
       <div id="app-container" className={containerClassnames}>
-        <TopNav /> 
-        <Sidebar /> 
+        <TopNav />
+        <Sidebar />
         <main>
           <div className="container-fluid">
             <Switch>

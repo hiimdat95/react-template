@@ -250,12 +250,10 @@ class Sidebar extends Component {
     let functionTree = null;
     if (!_isEmpty(hiarachy)) {
       functionTree = _groupBy(hiarachy, 'ParentId');
-      console.log(functionTree);
       functionTree.null.forEach(item => {
         // eslint-disable-next-line no-param-reassign
         item.children = functionTree[item.Id];
       });
-      console.log(functionTree);
       functionTree = functionTree.null;
     }
 
@@ -267,13 +265,13 @@ class Sidebar extends Component {
               option={{ suppressScrollX: true, wheelPropagation: false }}
             >
               <Nav vertical className="list-unstyled">
-                {_orderBy(functionTree , ['SortOrder'], 1).map(
+                {_orderBy(functionTree, ['SortOrder'], ['true']).map(
                   x =>
-                    x.selectedParentNoSubItem === 1 ? (
+                    x.Status == true ? (
                       <NavItem
                         key={x.Id}
                         className={classnames({
-                          Status:
+                          active:
                             (this.state.selectedParentMenu === x.Id &&
                               this.state.viewingParentMenu === x.Id) ||
                             this.state.viewingParentMenu === x.Id,
@@ -309,7 +307,7 @@ class Sidebar extends Component {
               {_map(
                 functionTree,
                 x =>
-                  x.Status === 1 ? (
+                  x.Status == true ? (
                     <Nav
                       className={classnames({
                         'd-block':
@@ -322,7 +320,7 @@ class Sidebar extends Component {
                     >
                       {_orderBy(x.children, ['SortOrder'], 1).map(
                         y =>
-                          y.Status === 1 ? (
+                          y.Status == true ? (
                             <NavItem key={y.Id}>
                               <NavLink to={y.URL}>
                                 <i className={y.IconCss} />
