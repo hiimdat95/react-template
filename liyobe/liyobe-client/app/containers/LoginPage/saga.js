@@ -12,9 +12,8 @@ export function* getLogin(action) {
   // Get Param and Body
   const { username, password } = action.values;
   const optionBody = `client_id=${encodeURIComponent(
-    'client',
-  )}&client_secret=${encodeURIComponent('secret')}
-  &grant_type=${encodeURIComponent('password')}
+    'react_code_client',
+  )}&grant_type=${encodeURIComponent('password')}
   &scope=${encodeURIComponent('api1')}&`;
   const body = `${optionBody}username=${encodeURIComponent(
     username,

@@ -116,31 +116,31 @@ namespace liyobe.WebApi.Options
                 },
                 new Client
                 {
-                    ClientName = "angular_code_client",
-                    ClientId = "angular_code_client",
-                    AccessTokenType = AccessTokenType.Reference,
+                    ClientName = "react_code_client",
+                    ClientId = "react_code_client",
+                    //AccessTokenType = AccessTokenType.Reference,
                     RequireConsent = false,
 
                     RequireClientSecret = false,
-                    AllowedGrantTypes = GrantTypes.Code,
+                    AllowedGrantTypes = GrantTypes.ResourceOwnerPasswordAndClientCredentials,
                     RequirePkce = true,
 
                     AllowAccessTokensViaBrowser = true,
                     RedirectUris = new List<string>
                     {
-                        "http://localhost:4200",
-                        "http://localhost:4200/authentication/login-callback",
-                        "http://localhost:4200/silent-renew.html"
+                        "http://localhost:4001",
+                        "http://localhost:4001/authentication/login-callback",
+                        "http://localhost:4001/silent-renew.html"
                     },
                     PostLogoutRedirectUris = new List<string>
                     {
-                        "http://localhost:4200/unauthorized",
-                        "http://localhost:4200/authentication/logout-callback",
-                        "http://localhost:4200"
+                        "http://localhost:4001/unauthorized",
+                        "http://localhost:4001/authentication/logout-callback",
+                        "http://localhost:4001"
                     },
                     AllowedCorsOrigins = new List<string>
                     {
-                        "http://localhost:4200"
+                        "http://localhost:4001"
                     },
                     AllowedScopes = new List<string>
                     {

@@ -1,10 +1,12 @@
-﻿using liyobe.Data;
+﻿using IdentityServer4.Services;
+using liyobe.Data;
 using liyobe.Models.Entities;
 using liyobe.WebApi.Options;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using System;
 
 namespace liyobe.WebApi.Installers
@@ -27,6 +29,8 @@ namespace liyobe.WebApi.Installers
                 options.Events.RaiseInformationEvents = true;
                 options.Events.RaiseFailureEvents = true;
                 options.Events.RaiseSuccessEvents = true;
+                options.UserInteraction.LoginUrl = "/Identity/Account/Login";
+                options.UserInteraction.LogoutUrl = "/Identity/Account/Logout";
             })
                 .AddDeveloperSigningCredential()
                 //.AddInMemoryPersistedGrants()
@@ -34,6 +38,7 @@ namespace liyobe.WebApi.Installers
                 .AddInMemoryApiResources(IdentityConfigs.GetApiResources())
                 .AddInMemoryClients(IdentityConfigs.GetClients())
                 .AddAspNetIdentity<AppUser>();
+            services.AddAuthentication(IdentityConstants.ApplicationScheme);
 
             // Configure Identity
             services.Configure<IdentityOptions>(options =>
@@ -60,6 +65,7 @@ namespace liyobe.WebApi.Installers
                     policy.RequireAuthenticatedUser();
                 });
             });
+           
         }
     }
 }

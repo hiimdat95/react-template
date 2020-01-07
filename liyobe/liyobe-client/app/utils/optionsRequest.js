@@ -2,8 +2,8 @@ import { getLoggedInUser } from './auth';
 export const optionsLogin = body => ({
   method: 'post',
   headers: {
-    Accept: 'application/json',
     'Content-Type': 'application/x-www-form-urlencoded',
+    'Access-Control-Allow-Origin': '*',
   },
   body,
 });
@@ -44,7 +44,6 @@ export const optionsModifyPass = body => ({
 });
 
 export const optionsPostUploadFile = body => {
-
   const data = new FormData();
   if (body) {
     console.log(body)

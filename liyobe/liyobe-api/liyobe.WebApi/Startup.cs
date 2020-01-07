@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using IdentityServer4.Services;
 using liyobe.ApplicationCore.AutoMapper;
 using liyobe.Data;
 using liyobe.Infrastructure.Interfaces.IRepository;
@@ -13,6 +14,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using SwaggerOptions = liyobe.WebApi.Options.SwaggerOptions;
 
 namespace liyobe.WebApi
@@ -45,20 +47,42 @@ namespace liyobe.WebApi
             services.AddTransient<DbInitializer>();
 
             services.InstallServicesInAssembly(_configuration);
-            services.AddCors(options =>
-            {
-                //options.AddPolicy(MyAllowSpecificOrigins,
-                //builder =>
-                //{
-                //    builder.WithOrigins("http://localhost:4001",
-                //                        "http://localhost:4002");
+            //services.AddCors(options =>
+            //{
+            //    //options.AddPolicy(MyAllowSpecificOrigins,
+            //    //builder =>
+            //    //{
+            //    //    builder.WithOrigins("http://localhost:4001",
+            //    //                        "http://localhost:4002");
 
-                //});
-                options.AddPolicy(MyAllowSpecificOrigins,
-                builder => builder.AllowAnyOrigin()
-                .AllowAnyMethod()
-                .AllowAnyHeader());
-            });
+            //    //});
+            //    options.AddPolicy(MyAllowSpecificOrigins,
+            //    builder => builder.AllowAnyOrigin()
+            //    .AllowAnyMethod()
+            //    .AllowAnyHeader()
+            //    .AllowCredentials())
+            //    ;
+            //});
+            //var cors = new DefaultCorsPolicyService(_loggerFactory.CreateLogger<DefaultCorsPolicyService>())
+            //{
+            //    AllowedOrigins = { "https://foo", "https://bar" }
+            //};
+            //services.AddSingleton<ICorsPolicyService>(cors);
+
+           // add CORS policy for non - IdentityServer endpoints
+
+           services.AddCors(options =>
+           {
+               options.AddPolicy(MyAllowSpecificOrigins, policy =>
+               {
+                   policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+               });
+           });
+           var cors = new DefaultCorsPolicyService(new LoggerFactory().CreateLogger<DefaultCorsPolicyService>())
+            {
+                 AllowedOrigins = { "http://localhost:4001", "http://localhost:4002" }
+            };
+            services.AddSingleton<ICorsPolicyService>(cors);
 
             services.AddMvc().AddJsonOptions(options =>
             {
@@ -79,6 +103,7 @@ namespace liyobe.WebApi
                 app.UseExceptionHandler("/error");
             }
             app.UseStaticFiles();
+            app.UseCors(MyAllowSpecificOrigins);
             app.UseIdentityServer();
             var swaggerOptions = new SwaggerOptions();
             _configuration.GetSection(nameof(SwaggerOptions)).Bind(swaggerOptions);
@@ -89,8 +114,9 @@ namespace liyobe.WebApi
             {
                 option.SwaggerEndpoint(swaggerOptions.UiEndpoint, swaggerOptions.Description);
             });
-            app.UseCors(MyAllowSpecificOrigins);
+            
             app.UseMiddleware<CustomExceptionHandlerMiddleware>();
+            app.UseAuthentication();
             app.UseMvc();
         }
     }
