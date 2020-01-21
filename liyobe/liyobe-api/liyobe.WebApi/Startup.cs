@@ -21,15 +21,16 @@ namespace liyobe.WebApi
 {
     public class Startup
     {
-
         private readonly IConfiguration _configuration;
         private readonly IHostingEnvironment _environment;
-        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+        private readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
         public Startup(IConfiguration configuration, IHostingEnvironment environment)
         {
             _configuration = configuration;
             _environment = environment;
         }
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
@@ -47,40 +48,18 @@ namespace liyobe.WebApi
             services.AddTransient<DbInitializer>();
 
             services.InstallServicesInAssembly(_configuration);
-            //services.AddCors(options =>
-            //{
-            //    //options.AddPolicy(MyAllowSpecificOrigins,
-            //    //builder =>
-            //    //{
-            //    //    builder.WithOrigins("http://localhost:4001",
-            //    //                        "http://localhost:4002");
 
-            //    //});
-            //    options.AddPolicy(MyAllowSpecificOrigins,
-            //    builder => builder.AllowAnyOrigin()
-            //    .AllowAnyMethod()
-            //    .AllowAnyHeader()
-            //    .AllowCredentials())
-            //    ;
-            //});
-            //var cors = new DefaultCorsPolicyService(_loggerFactory.CreateLogger<DefaultCorsPolicyService>())
-            //{
-            //    AllowedOrigins = { "https://foo", "https://bar" }
-            //};
-            //services.AddSingleton<ICorsPolicyService>(cors);
-
-           // add CORS policy for non - IdentityServer endpoints
-
-           services.AddCors(options =>
-           {
-               options.AddPolicy(MyAllowSpecificOrigins, policy =>
-               {
-                   policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
-               });
-           });
-           var cors = new DefaultCorsPolicyService(new LoggerFactory().CreateLogger<DefaultCorsPolicyService>())
+            // add CORS policy for non - IdentityServer endpoints
+            services.AddCors(options =>
             {
-                 AllowedOrigins = { "http://localhost:4001", "http://localhost:4002" }
+                options.AddPolicy(MyAllowSpecificOrigins, policy =>
+                {
+                    policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+                });
+            });
+            var cors = new DefaultCorsPolicyService(new LoggerFactory().CreateLogger<DefaultCorsPolicyService>())
+            {
+                AllowedOrigins = { "http://localhost:4001", "http://localhost:4002" }
             };
             services.AddSingleton<ICorsPolicyService>(cors);
 
@@ -114,7 +93,7 @@ namespace liyobe.WebApi
             {
                 option.SwaggerEndpoint(swaggerOptions.UiEndpoint, swaggerOptions.Description);
             });
-            
+
             app.UseMiddleware<CustomExceptionHandlerMiddleware>();
             app.UseAuthentication();
             app.UseMvc();
