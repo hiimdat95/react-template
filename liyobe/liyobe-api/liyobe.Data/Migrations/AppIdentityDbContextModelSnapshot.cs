@@ -3,17 +3,15 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using liyobe.Data;
 
 namespace liyobe.Data.Migrations
 {
-    [DbContext(typeof(AppDbContext))]
-    [Migration("20191023093340_InitialMigration")]
-    partial class InitialMigration
+    [DbContext(typeof(AppIdentityDbContext))]
+    partial class AppIdentityDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -110,7 +108,7 @@ namespace liyobe.Data.Migrations
                     b.ToTable("AppUserTokens");
                 });
 
-            modelBuilder.Entity("liyobe.Models.Entities.AppRoles", b =>
+            modelBuilder.Entity("liyobe.Models.Entities.AppRole", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -138,7 +136,7 @@ namespace liyobe.Data.Migrations
                     b.ToTable("AppRoles");
                 });
 
-            modelBuilder.Entity("liyobe.Models.Entities.AppUsers", b =>
+            modelBuilder.Entity("liyobe.Models.Entities.AppUser", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -204,36 +202,33 @@ namespace liyobe.Data.Migrations
                     b.ToTable("AppUsers");
                 });
 
-            modelBuilder.Entity("liyobe.Models.Entities.SystemConfig", b =>
+            modelBuilder.Entity("liyobe.Models.Entities.RefreshToken", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasMaxLength(128);
+                        .HasMaxLength(128)
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(128);
+                    b.Property<DateTime>("DateCreated");
 
-                    b.Property<bool>("Status");
+                    b.Property<DateTime>("DateModified");
 
-                    b.Property<string>("Value1");
+                    b.Property<DateTime>("Expires");
 
-                    b.Property<int?>("Value2");
+                    b.Property<string>("RemoteIpAddress");
 
-                    b.Property<bool?>("Value3");
+                    b.Property<string>("Token");
 
-                    b.Property<DateTime?>("Value4");
-
-                    b.Property<decimal?>("Value5");
+                    b.Property<int>("UserId");
 
                     b.HasKey("Id");
 
-                    b.ToTable("SystemConfigs");
+                    b.ToTable("RefreshTokens");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
-                    b.HasOne("liyobe.Models.Entities.AppRoles")
+                    b.HasOne("liyobe.Models.Entities.AppRole")
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -241,7 +236,7 @@ namespace liyobe.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
                 {
-                    b.HasOne("liyobe.Models.Entities.AppUsers")
+                    b.HasOne("liyobe.Models.Entities.AppUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -249,7 +244,7 @@ namespace liyobe.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
                 {
-                    b.HasOne("liyobe.Models.Entities.AppUsers")
+                    b.HasOne("liyobe.Models.Entities.AppUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -257,12 +252,12 @@ namespace liyobe.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
                 {
-                    b.HasOne("liyobe.Models.Entities.AppRoles")
+                    b.HasOne("liyobe.Models.Entities.AppRole")
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("liyobe.Models.Entities.AppUsers")
+                    b.HasOne("liyobe.Models.Entities.AppUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -270,7 +265,7 @@ namespace liyobe.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
                 {
-                    b.HasOne("liyobe.Models.Entities.AppUsers")
+                    b.HasOne("liyobe.Models.Entities.AppUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);

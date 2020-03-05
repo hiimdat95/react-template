@@ -5,7 +5,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using System;
+using System.Text;
 
 namespace liyobe.WebApi.Installers
 {
@@ -16,24 +18,16 @@ namespace liyobe.WebApi.Installers
             var connectionString = configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<AppDbContext>(
                 options => options.UseSqlServer(connectionString));
+            services.AddDbContext<AppIdentityDbContext>(options => options.UseSqlServer(connectionString));
+            // Register the CongigurationBuilder instance of AuthSettings
+            var authSettings = configuration.GetSection(nameof(AuthSettings));
+            services.Configure<AuthSettings>(authSettings);
+            var singinKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(authSettings[nameof(AuthSettings.SecretKey)]));
+
 
             services.AddIdentity<AppUser, AppRole>()
                 .AddEntityFrameworkStores<AppDbContext>()
                 .AddDefaultTokenProviders();
-
-            services.AddIdentityServer(options =>
-            {
-                options.Events.RaiseErrorEvents = true;
-                options.Events.RaiseInformationEvents = true;
-                options.Events.RaiseFailureEvents = true;
-                options.Events.RaiseSuccessEvents = true;
-            })
-                .AddDeveloperSigningCredential()
-                //.AddInMemoryPersistedGrants()
-                .AddInMemoryIdentityResources(IdentityConfigs.GetIdentityResources())
-                .AddInMemoryApiResources(IdentityConfigs.GetApiResources())
-                .AddInMemoryClients(IdentityConfigs.GetClients())
-                .AddAspNetIdentity<AppUser>();
 
             // Configure Identity
             services.Configure<IdentityOptions>(options =>

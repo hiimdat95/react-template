@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace liyobe.Data.Migrations
+namespace liyobe.Data.Migrations.AppDb
 {
-    public partial class AddModelFunctionLocale : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -37,6 +38,24 @@ namespace liyobe.Data.Migrations
                 {
                     table.PrimaryKey("PK_Locales", x => x.Id);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "SystemConfigs",
+                columns: table => new
+                {
+                    Id = table.Column<string>(maxLength: 128, nullable: false),
+                    Name = table.Column<string>(maxLength: 128, nullable: false),
+                    Value1 = table.Column<string>(nullable: true),
+                    Value2 = table.Column<int>(nullable: true),
+                    Value3 = table.Column<bool>(nullable: true),
+                    Value4 = table.Column<DateTime>(nullable: true),
+                    Value5 = table.Column<decimal>(nullable: true),
+                    Status = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SystemConfigs", x => x.Id);
+                });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -46,6 +65,9 @@ namespace liyobe.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Locales");
+
+            migrationBuilder.DropTable(
+                name: "SystemConfigs");
         }
     }
 }

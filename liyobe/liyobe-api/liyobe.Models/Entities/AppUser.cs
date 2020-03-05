@@ -37,7 +37,5 @@ namespace liyobe.Models.Entities
         public DateTime DateCreated { get; set; }
         public DateTime DateModified { get; set; }
         public bool Status { get; set; }
-
-        public ICollection<IdentityUserClaim<string>> Claims { get; set; } = new List<IdentityUserClaim<string>>();
     }
 }

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace liyobe.Data.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -56,21 +56,21 @@ namespace liyobe.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "SystemConfigs",
+                name: "RefreshTokens",
                 columns: table => new
                 {
-                    Id = table.Column<string>(maxLength: 128, nullable: false),
-                    Name = table.Column<string>(maxLength: 128, nullable: false),
-                    Value1 = table.Column<string>(nullable: true),
-                    Value2 = table.Column<int>(nullable: true),
-                    Value3 = table.Column<bool>(nullable: true),
-                    Value4 = table.Column<DateTime>(nullable: true),
-                    Value5 = table.Column<decimal>(nullable: true),
-                    Status = table.Column<bool>(nullable: false)
+                    Id = table.Column<int>(maxLength: 128, nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Token = table.Column<string>(nullable: true),
+                    Expires = table.Column<DateTime>(nullable: false),
+                    UserId = table.Column<int>(nullable: false),
+                    RemoteIpAddress = table.Column<string>(nullable: true),
+                    DateCreated = table.Column<DateTime>(nullable: false),
+                    DateModified = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SystemConfigs", x => x.Id);
+                    table.PrimaryKey("PK_RefreshTokens", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -230,7 +230,7 @@ namespace liyobe.Data.Migrations
                 name: "AppUserTokens");
 
             migrationBuilder.DropTable(
-                name: "SystemConfigs");
+                name: "RefreshTokens");
 
             migrationBuilder.DropTable(
                 name: "AppRoles");
