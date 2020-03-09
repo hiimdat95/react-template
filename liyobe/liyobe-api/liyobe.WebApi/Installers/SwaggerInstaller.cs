@@ -12,13 +12,17 @@ namespace liyobe.WebApi.Installers
             services.AddSwaggerGen(options =>
             {
                 options.SwaggerDoc("v1", new Info { Title = "DIY API", Version = "V1" });
-                options.AddSecurityDefinition("oauth2", new OAuth2Scheme
+                options.AddSecurityDefinition("Bearer", new ApiKeyScheme
                 {
-                    Flow = "implicit",
-                    AuthorizationUrl = "http://localhost:5000/connect/authorize",
-                    Scopes = new Dictionary<string, string> {
-                        { "api1", "DIY API" }
-                    }
+                    In = "header",
+                    Description = "Please insert JWT with Bearer into field",
+                    Name = "Authorization",
+                    Type = "apiKey"
+                });
+
+                options.AddSecurityRequirement(new Dictionary<string, IEnumerable<string>>
+                {
+                    {"Bearer", new string [] { } }
                 });
             });
 

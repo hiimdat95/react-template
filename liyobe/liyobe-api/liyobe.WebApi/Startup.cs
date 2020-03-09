@@ -1,11 +1,13 @@
 ﻿using AutoMapper;
 using liyobe.ApplicationCore.AutoMapper;
 using liyobe.Data;
+using liyobe.Infrastructure.Interfaces.Auth;
 using liyobe.Infrastructure.Interfaces.IRepository;
 using liyobe.Infrastructure.Interfaces.IUnitOfWork;
 using liyobe.Models.Entities;
 using liyobe.Services.Implementations;
 using liyobe.Services.Interfaces;
+using liyobe.WebApi.Auth;
 using liyobe.WebApi.Infrastructure;
 using liyobe.WebApi.Installers;
 using Microsoft.AspNetCore.Builder;
@@ -41,6 +43,11 @@ namespace liyobe.WebApi
             services.AddTransient(typeof(IAsyncRepository<,>), typeof(EFRepository<,>));
             services.AddTransient<IFunctionService, FunctionService>();
             services.AddTransient<ILocaleService, LocaleService>();
+
+            services.AddScoped<IJwtFactory, JwtFactory>();
+            services.AddScoped<IJwtTokenHandler, JwtTokenHandler>();
+            services.AddScoped<ITokenFactory, TokenFactory>();
+            services.AddScoped<IJwtTokenValidator, JwtTokenValidator>();
 
             services.AddTransient<DbInitializer>();
 
@@ -79,7 +86,6 @@ namespace liyobe.WebApi
                 app.UseExceptionHandler("/error");
             }
             app.UseStaticFiles();
-            app.UseIdentityServer();
             var swaggerOptions = new SwaggerOptions();
             _configuration.GetSection(nameof(SwaggerOptions)).Bind(swaggerOptions);
 
