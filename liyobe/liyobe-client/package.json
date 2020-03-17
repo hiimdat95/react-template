@@ -71,7 +71,7 @@
     "jwt-decode": "^2.2.0",
     "loadable-components": "2.2.3",
     "lodash": "^4.17.15",
-    "minimist": "1.2.0",
+    "minimist": "1.2.5",
     "prop-types": "15.6.2",
     "rc-switch": "^1.9.0",
     "react": "16.6.0",
